@@ -334,8 +334,8 @@ footer {
 <div id="file_dialog" draggable="true">
     <div>ファイル選択</div>
     <input type="file" name="file_name">
+    <input type="hidden" name="id">
     <div>
-        <button type="button" id="file_dialog_ok_button">選択</button>
         <button type="button" id="file_dialog_close_button">閉じる</button>
     </div>
 </div>
@@ -503,8 +503,17 @@ document.querySelector('#frame1 .remove_setting')
 document.querySelector('#frame1 .upload_setting')
     .addEventListener('click', function(e) {
     
+    document.querySelector('#file_dialog input[name="id"]')
+        .value = '#frame1';
+    
     document.querySelector('#file_dialog')
         .style.display = "block";
+});
+
+document.querySelector('#frame1 .download_setting')
+    .addEventListener('click', function(e) {
+    
+    StampJsView.download('frame1', '#frame1');
 });
 
 //clear
@@ -553,16 +562,6 @@ document.querySelector('#frame1 [name="stamp_select"]')
     }
 });
 
-
-
-
-
-
-
-//////////////
-//frame1選択必要で!!!!!!!!!!!!!!
-
-
 //dialog
 document.querySelector('#file_dialog > [name="file_name"]')
     .addEventListener('change', function(e) {
@@ -570,15 +569,16 @@ document.querySelector('#file_dialog > [name="file_name"]')
     document.querySelector('#file_dialog')
         .style.display = "none";
     
+    let selector = document.querySelector('#file_dialog [name="id"]').value;
+    
     let reader = new FileReader();
     let files = e.target.files;
     reader.readAsText(files[0]);
     
-    let _data = data;
-    
     reader.addEventListener('load', function(e) {
-        _data = JSON.parse(e.result);
-        document.querySelector('#refresh_setting').click();
+        let data = JSON.parse(reader.result);
+        StampJsView.dataToFrom(selector, data);
+        document.querySelector('#frame1 .refresh_setting').click();
     });
 });
 

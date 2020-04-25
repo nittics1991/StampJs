@@ -181,8 +181,6 @@ let StampJsView =  {
     *
     *   @param string selector
     *   @param object dataset
-    *   @example <input type="text" name="frame1_stamp_width">
-    *       render('frame1', data)
     */
     dataToFrom:function(selector, dataset) {
         let stamp_select = document.querySelector(
@@ -301,6 +299,53 @@ let StampJsView =  {
             id + '_' + stamp_select
         );
     },
+    
+    /**
+    *   download
+    *
+    *   @param string id
+    *   @param string selector
+    */
+    download:function(id, selector) {
+        let elms = document.querySelectorAll(
+            selector + ' [name="stamp_select"] option'
+        );
+        
+        let dataset = Array.prototype.map.call(elms, function(elm) {
+            return window.localStorage.getItem(
+                id + '_' + elm.value
+            );
+        }).filter(function(data) {
+            return data != null;
+        });
+        StampHelper.downloadFile(JSON.stringify(dataset), 'setting.json')
+    },
+    
+    /**
+    *   upload
+    *
+    *   @param string id
+    *   @param string selector
+    */
+    upload:function(id, selector) {
+        let elms = document.querySelectorAll(
+            selector + ' [name="stamp_select"] option'
+        );
+        
+        let dataset = Array.prototype.map.call(elms, function(elm) {
+            return window.localStorage.getItem(
+                id + '_' + elm.value
+            );
+        }).filter(function(data) {
+            return data != null;
+        });
+        StampHelper.downloadFile(JSON.stringify(dataset), 'setting.json')
+    },
+    
+    
+    
+    
+    
     
     /**
     *   disableTo
