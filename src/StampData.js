@@ -6,6 +6,8 @@
 let StampData = function(dataset) {
     this.text_aligns = ['left', 'center', 'right'];
     this.vertical_aligns = ['top', 'middle', 'bottom'];
+    
+    this.error = null;
     this._init(dataset);
 };
 
@@ -41,15 +43,28 @@ StampData.prototype._init = function(dataset) {
 *   @return bool
 */
 StampData.prototype.validate = function() {
-    if (!isFinite(this.font_size)) return false;
+    this.error = null;
+    this._doValidate();
+    return this.error == null;
+};
+
+/**
+*   validate
+*
+*   @return bool
+*/
+StampData.prototype._doValidate = function() {
+    if (!isFinite(this.font_size))
+        throw 'font_size';
 
     if (this.text_aligns.indexOf(this.text_align) === -1)
-        return false;
+        throw 'text_align';
 
     if (this.vertical_aligns.indexOf(this.vertical_align) === -1)
-        return false;
+        throw 'vertical_align';
 
-    if (!isFinite(this.margin_size)) return false;
+    if (!isFinite(this.margin_size))
+        throw 'margin_size';
 
     return true;
 };

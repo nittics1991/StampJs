@@ -16,7 +16,8 @@ let StampFrame = function(dataset) {
         'top',
         'bottom',
     ];
-
+    
+    this.error = null;
     this._init(dataset);
 };
 
@@ -63,36 +64,54 @@ StampFrame.prototype._init = function(dataset) {
 *   @return bool
 */
 StampFrame.prototype.validate = function() {
-    if (this.stamp_types.indexOf(this.stamp_type) === -1)
-        return false;
+    this.error = null;
+    this._doValidate();
+    return this.error == null;
+};
 
-    if (!isFinite(this.stamp_width)) return false;
+/**
+*   _doValidate
+*
+*   @return bool
+*/
+StampFrame.prototype._doValidate = function() {
+    try {
+        if (this.stamp_types.indexOf(this.stamp_type) === -1)
+            throw 'stamp_type';
 
-    if (!isFinite(this.stamp_height)) return false;
+        if (!isFinite(this.stamp_width))
+            throw 'stamp_width';
 
-    if (this.stamp_height !== this.stamp_width) return false;
+        if (!isFinite(this.stamp_height))
+            throw 'stamp_height';
 
-    if (!isFinite(this.line_weight)) return false;
+        if (this.stamp_height !== this.stamp_width)
+            throw 'stamp_height/stamp_width';
 
-    if (this.stamp_colors.indexOf(this.stamp_color) === -1)
-        return false;
+        if (!isFinite(this.line_weight))
+            throw 'line_weight';
 
-    if (this.border_directions.indexOf(this.border_direction) === -1)
-        return false;
+        if (this.stamp_colors.indexOf(this.stamp_color) === -1)
+            throw 'stamp_color';
 
-    if (this.text_placements.indexOf(this.text_placement) === -1)
-        return false;
+        if (this.border_directions.indexOf(this.border_direction) === -1)
+            throw 'border_direction';
 
-    if (this.text_directions.indexOf(this.text_direction) === -1)
-        return false;
+        if (this.text_placements.indexOf(this.text_placement) === -1)
+            throw 'text_placement';
 
-    if (this.option_positions.indexOf(this.option_position) === -1)
-        return false;
-    
-    if (this.backgroound_color.trim() === '')
-        return false;
-    
-    return true;
+        if (this.text_directions.indexOf(this.text_direction) === -1)
+            throw 'text_direction';
+
+        if (this.option_positions.indexOf(this.option_position) === -1)
+            throw 'option_position';
+        
+        if (this.backgroound_color.trim() === '')
+            throw 'backgroound_color';
+    } catch (e) {
+        this.error = e;
+        return;
+    }
 };
 
 //スタンプ型
