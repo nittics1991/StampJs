@@ -585,10 +585,10 @@ document.querySelector('#file_dialog > [name="file_name"]')
             '#file_dialog [name="id"]'
         ).value;
         
-        
         let stamp_selects = [];
         
-        dataset.forEach(function(data) {
+        dataset.forEach(function(json) {
+            let data = JSON.parse(json)
             stamp_selects.push(data.stamp_select);
             StampJsView.dataToFrom(selector, data);
             document.querySelector('#frame1 .save_setting').click();

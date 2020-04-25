@@ -177,7 +177,7 @@ let StampJsView =  {
     },
     
     /**
-    *   renderData
+    *   dataToFrom
     *
     *   @param string selector
     *   @param object dataset
@@ -318,6 +318,7 @@ let StampJsView =  {
         }).filter(function(data) {
             return data != null;
         });
+        //StampHelper.downloadFile(dataset, 'setting.json')
         StampHelper.downloadFile(JSON.stringify(dataset), 'setting.json')
     },
     
