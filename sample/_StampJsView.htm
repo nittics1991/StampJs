@@ -569,16 +569,40 @@ document.querySelector('#file_dialog > [name="file_name"]')
     document.querySelector('#file_dialog')
         .style.display = "none";
     
-    let selector = document.querySelector('#file_dialog [name="id"]').value;
-    
     let reader = new FileReader();
     let files = e.target.files;
     reader.readAsText(files[0]);
     
     reader.addEventListener('load', function(e) {
-        let data = JSON.parse(reader.result);
-        StampJsView.dataToFrom(selector, data);
-        document.querySelector('#frame1 .refresh_setting').click();
+        let dataset = JSON.parse(reader.result);
+        
+        if (dataset == null ||
+            dataset == [] ||
+            !Array.isArray(dataset)
+        ) return;
+        
+        let selector = document.querySelector(
+            '#file_dialog [name="id"]'
+        ).value;
+        
+        
+        let stamp_selects = [];
+        
+        dataset.forEach(function(data) {
+            stamp_selects.push(data.stamp_select);
+            StampJsView.dataToFrom(selector, data);
+            document.querySelector('#frame1 .save_setting').click();
+        });
+        
+         let stamp_select = document.querySelector(
+            '#frame1 [name="stamp_select"]'
+        ).value;
+        
+        let pos = stamp_selects.indexOf(stamp_select)
+        if (pos !== -1) {
+            StampJsView.dataToFrom(selector, dataset[pos]);
+            document.querySelector('#frame1 .refresh_setting').click();
+        }
     });
 });
 

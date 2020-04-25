@@ -322,39 +322,12 @@ let StampJsView =  {
     },
     
     /**
-    *   upload
-    *
-    *   @param string id
-    *   @param string selector
-    */
-    upload:function(id, selector) {
-        let elms = document.querySelectorAll(
-            selector + ' [name="stamp_select"] option'
-        );
-        
-        let dataset = Array.prototype.map.call(elms, function(elm) {
-            return window.localStorage.getItem(
-                id + '_' + elm.value
-            );
-        }).filter(function(data) {
-            return data != null;
-        });
-        StampHelper.downloadFile(JSON.stringify(dataset), 'setting.json')
-    },
-    
-    
-    
-    
-    
-    
-    /**
     *   disableTo
     *
     *   @param string selector
     *   @param array columnNos
     */
     disableTo:function(selector, columnNos) {
-        
         for (let i = 1; i <= 4; i++) {
             if (columnNos.includes(i)) {
                 StampHelper.disableTableColumn(selector + ' .setting_parts', i+1);
@@ -365,6 +338,4 @@ let StampJsView =  {
             }
         }
     },
-    
-    
 };
