@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8"> 
+
+<title>StmpJs</title>
+
+<style>
+
+.font_family {
+    display:none;
+}
+
+#main {
+    position:relative;
+}
+
+canvas {
+	border:1px ridge #0000ff;
+}
+
+table {
+	border-collapse:collapse;
+}
+
+.setting_area th,td {
+	border: 1px ridge #cfcfcf;
+}
+
+ul {
+    padding:0;
+    list-style-type:none;
+}
+
+.stamp_buttons {
+    display:flex;
+    align-items:center;
+}
+
+footer {
+    height:40px;
+}
+
+#file_dialog {
+    border:2px ridge #000000;
+    display:none;
+    z-index:10;
+    position:absolute;
+    left:40%;
+    top:0;
+    width:300px;
+    background-color:#ffffff;
+}
+
+#file_dialog > div:first-child {
+    background-color:#c0c0c0;
+}
+
+#file_dialog > div:last-child {
+    display:flex;
+    justify-content:center
+}
+
+</style>
+
+</head>
+<body>
+
+<div id="main">
+<div id="frame1" class="frame">
+	<h4>スタンプ StampJs</h4>
+	<div class="stamp_area">
+		<div id="frame1_stamp_image"></div>
+	</div>
+	<div class="setting_area">
+        <ul class="stamp_buttons">
+            <li>
+                <select name="frame1_stamp_select">
+                    <option value=""></option>
+                    <option value="dateStamp">日付印</option>
+                    <option value="signetStamp">認印</option>
+                    <option value="squareStamp">角印</option>
+                    <option value="companyStamp">社印</option>
+                    <option value="freeStamp1">自由1</option>
+                    <option value="freeStamp2">自由2</option>
+                    <option value="freeStamp3">自由3</option>
+                    <option value="freeStamp4">自由4</option>
+                    <option value="freeStamp5">自由5</option>
+                </select>
+            </li>
+            
+            <li><button type="button" id="refresh_setting">更新</button></li>
+            <li><button type="button" id="load_setting">読込</button></li>
+            <li><button type="button" id="save_setting">保存</button></li>
+            <li><button type="button" id="remove_setting">削除</button></li>
+            <li><button type="button" id="upload_setting">アップロード</button></li>
+            <li><button type="button" id="download_setting">ダウンロード</button></li>
+        </ul>
+        
+		<table class="setting_full">
+			<thead>
+				<tr>
+					<th></th>
+					<th>全体</th>
+				</tr>
+			</thead>
+			<tbody>
+                <tr class="stamp_width">
+					<th>種別</th>
+					<td>
+						<label><input type="radio" name="frame1_stamp_type[]" value="circle" checked></inpit>丸印</label>
+						<label><input type="radio" name="frame1_stamp_type[]" value="box"></inpit>角印</label>
+                    </td>
+				</tr>
+				
+                <tr class="stamp_width">
+					<th>全体幅</th>
+					<td>
+						<input type="number" name="frame1_stamp_width" value="38"></inpit>
+					</td>
+				</tr>
+				
+				<tr class="stamp_height">
+					<th>全体高</th>
+					<td>
+						<input type="number" name="frame1_stamp_height" value="38"></inpit>
+					</td>
+				</tr>
+				
+				<tr class="line_weight">
+					<th>線幅</th>
+					<td>
+						<input type="number" name="frame1_line_weight" value="2"></inpit>
+					</td>
+				</tr>
+				
+				<tr class="stamp_color">
+					<th>印影色</th>
+					<td>
+						<label><input type="radio" name="frame1_stamp_color[]" value="red" checked></inpit>赤</label>
+						<label><input type="radio" name="frame1_stamp_color[]" value="black"></inpit>黒</label>
+					</td>
+				</tr>
+				
+				<tr class="border_direction">
+					<th>仕切線</th>
+					<td>
+						<label><input type="radio" name="frame1_border_direction[]" value="H" checked></inpit>水平</label>
+						<label><input type="radio" name="frame1_border_direction[]" value="V"></inpit>垂直</label>
+					</td>
+				</tr>
+				
+				<tr class="text_direction">
+					<th>文字方向</th>
+					<td>
+						<label><input type="radio" name="frame1_text_direction[]" value="H" checked></inpit>水平</label>
+						<label><input type="radio" name="frame1_text_direction[]" value="V"></inpit>垂直</label>
+					</td>
+				</tr>
+				
+				<tr class="text_placement">
+					<th>文字配置方向</th>
+					<td>
+						<label><input type="radio" name="frame1_text_placement[]" value="H" checked></inpit>水平</label>
+						<label><input type="radio" name="frame1_text_placement[]" value="V"></inpit>垂直</label>
+					</td>
+				</tr>
+                
+				<tr class="option_position">
+					<th>追加情報</th>
+					<td>
+						<label><input type="radio" name="frame1_option_position[]" value="non" checked></inpit>無</label>
+						<label><input type="radio" name="frame1_option_position[]" value="left"></inpit>左</label>
+						<label><input type="radio" name="frame1_option_position[]" value="right"></inpit>右</label>
+						<label><input type="radio" name="frame1_option_position[]" value="top"></inpit>上</label>
+						<label><input type="radio" name="frame1_option_position[]" value="bottom"></inpit>下</label>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		
+		<table class="setting_parts">
+			<thead>
+				<tr>
+					<th></th>
+					<th>1段目</th>
+					<th>2段目</th>
+					<th>3段目</th>
+					<th>追加情報</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th></th>
+					<th><button type="button" name="clear1">クリア</button></th>
+					<th><button type="button" name="clear2">クリア</button></th>
+					<th><button type="button" name="clear3">クリア</button></th>
+					<th><button type="button" name="clear4">クリア</button></th>
+				</tr>
+                
+				<tr class="stamp_text">
+					<th>表示文字</th>
+					<td>
+						<input type="text" name="frame1_stamp_text[1]"></inpit>
+					</td>
+					<td>
+						<input type="text" name="frame1_stamp_text[2]"></inpit>
+					</td>
+					<td>
+						<input type="text" name="frame1_stamp_text[3]"></inpit>
+					</td>
+					<td>
+						<input type="text" name="frame1_stamp_text[4]"></inpit>
+					</td>
+				</tr>
+				
+				<tr class="font_family">
+					<th>フォント</th>
+					<td>
+						<select name="frame1_font_family[1]"></select>
+					</td>
+					<td>
+						<select name="frame1_font_family[2]"></select>
+					</td>
+					<td>
+						<select name="frame1_font_family[3]"></select>
+					</td>
+					<td>
+						<select name="frame1_font_family[4]"></select>
+					</td>
+				</tr>
+				
+				<tr class="font_size">
+					<th>サイズ</th>
+					<td>
+						<input type="number" name="frame1_font_size[1]" value="10"></inpit>
+					</td>
+					<td>
+						<input type="number" name="frame1_font_size[2]" value="10"></inpit>
+					</td>
+					<td>
+						<input type="number" name="frame1_font_size[3]" value="10"></inpit>
+					</td>
+					<td>
+						<input type="number" name="frame1_font_size[4]" value="10"></inpit>
+					</td>
+				</tr>
+				
+				<tr class="text_align">
+					<th>横配置</th>
+					<td>
+						<select name="frame1_text_align[1]">
+							<option value="left">左</option>
+							<option value="center" selected>中央</option>
+							<option value="right">右</option>
+						</select>
+					</td>
+					<td>
+						<select name="frame1_text_align[2]">
+							<option value="left">左</option>
+							<option value="center" selected>中央</option>
+							<option value="right">右</option>
+						</select>
+					</td>
+					<td>
+						<select name="frame1_text_align[3]">
+							<option value="left">左</option>
+							<option value="center" selected>中央</option>
+							<option value="right">右</option>
+						</select>
+					</td>
+					<td>
+						<select name="frame1_text_align[4]">
+							<option value="left">左</option>
+							<option value="center">中央</option>
+							<option value="right" selected>右</option>
+						</select>
+					</td>
+				</tr>
+				
+				<tr class="vertical_align">
+					<th>縦配置</th>
+					<td>
+						<select name="frame1_vertical_align[1]">
+							<option value="top">上</option>
+							<option value="middle">中央</option>
+							<option value="bottom" selected>下</option>
+						</select>
+					</td>
+					<td>
+						<select name="frame1_vertical_align[2]">
+							<option value="top">上</option>
+							<option value="middle" selected>中央</option>
+							<option value="bottom">下</option>
+						</select>
+					</td>
+					<td>
+						<select name="frame1_vertical_align[3]">
+							<option value="top" selected>上</option>
+							<option value="middle">中央</option>
+							<option value="bottom">下</option>
+						</select>
+					</td>
+					<td>
+						<select name="frame1_vertical_align[4]">
+							<option value="top" selected>上</option>
+							<option value="middle">中央</option>
+							<option value="bottom">下</option>
+						</select>
+					</td>
+				</tr>
+				
+				<tr class="margin_size">
+					<th>マージン</th>
+					<td>
+						<input type="number" name="frame1_margin_size[1]" value="1"></inpit>
+					</td>
+					<td>
+						<input type="number" name="frame1_margin_size[2]" value="1"></inpit>
+					</td>
+					<td>
+						<input type="number" name="frame1_margin_size[3]" value="1"></inpit>
+					</td>
+					<td>
+						<input type="number" name="frame1_margin_size[4]" value="1"></inpit>
+					</td>
+				</tr>
+				
+			</tbody>
+		</table>
+	</div>
+</div>
+          
+<div id="file_dialog" draggable="true">
+    <div>ファイル選択</div>
+    <input type="file" name="file_name">
+    <div>
+        <button type="button" id="file_dialog_ok_button">選択</button>
+        <button type="button" id="file_dialog_close_button">閉じる</button>
+    </div>
+</div>
+
+</div>
+
+<footer></footer>
+
+<script src="../src/StampFactory.js"></script> 
+<script src="../src/StampBuilder.js"></script> 
+
+<script src="../src/StampFrame.js"></script> 
+<script src="../src/StampData.js"></script>
+
+<script src="../src/HorizonText.js"></script> 
+<script src="../src/VerticalText.js"></script> 
+
+<script src="../src/CircleHorizonBorder.js"></script> 
+<script src="../src/CircleVerticalBorder.js"></script> 
+
+<script src="../src/RectHorizonBorder.js"></script> 
+<script src="../src/RectVerticalBorder.js"></script> 
+
+<script src="../src/HorizonPlacement.js"></script> 
+<script src="../src/VerticalPlacement.js"></script> 
+
+<script src="../src/OptionPosition.js"></script> 
+
+<script src="../src/RectStamp.js"></script> 
+<script src="../src/CircleStamp.js"></script> 
+
+<script src="../src/Shapes.js"></script> 
+<script src="../src/StampJs.js"></script> 
+ 
+<script src="../src/CanvasRender.js"></script> 
+
+<script src="../src/helper/StampHelper.js"></script> 
+<script src="../src/helper/StampJsView.js"></script> 
+
+<script>
+
+var inidata = {
+	stamp_select:'dateStamp',
+	frame:{
+		stamp_type:'circle',
+		stamp_width:200,
+		stamp_height:200,
+		line_weight:3,
+		stamp_color:'red',
+		border_direction:'H',
+		text_placement:'V',
+		text_direction:'H',
+		option_position:'bottom',
+	},
+	data:[
+		{
+			stamp_text:'(営業1)M',
+			font_family:'',
+			font_size:30,
+			text_align:'center',
+			vertical_align:'bottom',
+			margin_size:0,
+		},
+		{
+			stamp_text:'2020/12/31',
+			font_family:'',
+			font_size:30,
+			text_align:'center',
+			vertical_align:'middle',
+			margin_size:0,
+		},
+		{
+			stamp_text:'青木 太郎',
+			font_family:null,
+			font_size:30,
+			text_align:'center',
+			vertical_align:'top',
+			margin_size:5,
+		},
+		{
+			stamp_text:'代',
+			font_family:null,
+			font_size:30,
+			text_align:'right',
+			vertical_align:'bottom',
+			margin_size:0,
+		},
+	],
+};
+
+//action
+window.addEventListener('load', function() {
+    StampJsView.dataToFrom('frame1', inidata);
+	let stamp = new StampJs('#frame1_stamp_image', inidata);
+	stamp.render();
+    let imgUri = StampHelper.exchangeToImage('canvas');
+});
+
+document.querySelector('#refresh_setting')
+    .addEventListener('click', function(e) {
+	
+    StampJsView.clearImage('frame1');
+    
+    let data = StampJsView.formToData('frame1');
+    let factory = new StampFactory();
+	let builder = factory.builder();
+	let stamp;
+    
+    switch (data.stamp_select) {
+        case 'dateStamp':
+            stamp = builder.dateStamp('#frame1_stamp_image', data);
+            break;
+        case 'signetStamp':
+            stamp = builder.signetStamp('#frame1_stamp_image', data);
+            break;
+        case 'squareStamp':
+            stamp = builder.squareStamp('#frame1_stamp_image', data);
+            break;
+        case 'companyStamp':
+            stamp = builder.companyStamp('#frame1_stamp_image', data);
+            break;
+        case '':
+            return;
+        default:
+            stamp = new StampJs('#frame1_stamp_image', data);
+            break;
+    }
+	stamp.render();
+    let imgUri = StampHelper.exchangeToImage('canvas');
+});
+
+document.querySelector('#load_setting')
+    .addEventListener('click', function(e) {
+    
+    if (!window.confirm('May I load ?')) return;
+    let json = StampJsView.load('#frame1_stamp_image', data);
+    
+    if (json == null) return;
+    
+    data = JSON.parse(json);
+    StampJsView.dataToFrom('frame1', data);
+    document.querySelector('#refresh_setting').click();
+});
+
+document.querySelector('#save_setting')
+    .addEventListener('click', function(e) {
+    
+    if (!window.confirm('May I save ?')) return;
+    let data = StampJsView.formToData('frame1');
+    StampJsView.save('#frame1_stamp_image', data);
+});
+
+document.querySelector('#remove_setting')
+    .addEventListener('click', function(e) {
+    
+    if (!window.confirm('May I remove ?')) return;
+    let data = StampJsView.formToData('frame1');
+    StampJsView.remove('#frame1_stamp_image', data);
+});
+
+document.querySelector('#upload_setting')
+    .addEventListener('click', function(e) {
+    
+    document.querySelector('#file_dialog')
+        .style.display = "block";
+});
+
+//clear
+document.querySelector('button[name="clear1"]')
+    .addEventListener('click', function(e) {
+    
+    StampJsView.clearFormFor('frame1', 1);
+});
+
+document.querySelector('button[name="clear2"]')
+    .addEventListener('click', function(e) {
+    
+    StampJsView.clearFormFor('frame1', 2);
+});
+
+document.querySelector('button[name="clear3"]')
+    .addEventListener('click', function(e) {
+    
+    StampJsView.clearFormFor('frame1', 3);
+});
+
+document.querySelector('button[name="clear4"]')
+    .addEventListener('click', function(e) {
+    
+    StampJsView.clearFormFor('frame1', 4);
+});
+
+//selectbox
+document.querySelector('[name="frame1_stamp_select"]')
+    .addEventListener('change', function(e) {
+    
+    switch (e.target.value) {
+        case 'dateStamp':
+            StampJsView.disableTo('frame1', []);
+            break;
+        case 'signetStamp':
+            StampJsView.disableTo('frame1', [2,3,4]);
+            break;
+        case 'squareStamp':
+        case 'companyStamp':
+            StampJsView.disableTo('frame1', [4]);
+            break;
+        default:
+            StampJsView.disableTo('frame1', []);
+            break;
+    }
+});
+
+
+
+
+
+
+
+
+
+
+//dialog
+document.querySelector('#file_dialog > [name="file_name"]')
+    .addEventListener('change', function(e) {
+    
+    document.querySelector('#file_dialog')
+        .style.display = "none";
+    
+    let reader = new FileReader();
+    let files = e.target.files;
+    reader.readAsText(files[0]);
+    
+    let _data = data;
+    
+    reader.addEventListener('load', function(e) {
+        _data = JSON.parse(e.result);
+        document.querySelector('#refresh_setting').click();
+    });
+});
+
+document.querySelector('#file_dialog_close_button')
+    .addEventListener('click', function(e) {
+    
+    document.querySelector('#file_dialog')
+        .style.display = "none";
+});
+
+document.querySelector('#file_dialog')
+    .addEventListener('dragstart', function(e) {
+    
+    e.dataTransfer.setData("text/plain", "");
+    e.stopPropagation();
+});
+
+document.querySelector('#main')
+    .addEventListener('dragover', function(e) {
+    
+    e.preventDefault();
+});
+
+document.querySelector('#main')
+    .addEventListener('dragenter', function(e) {
+    
+    e.preventDefault();
+});
+
+document.querySelector('#main')
+    .addEventListener('drop', function(e) {
+    
+    e.preventDefault();
+    e.stopPropagation();
+    
+    let target = document.querySelector('#file_dialog')
+    target.style.top = e.clientY + 'px';
+    target.style.left = e.clientX + 'px';
+});
+
+</script>
+	
+</body>
+</html>
