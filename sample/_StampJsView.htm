@@ -481,7 +481,7 @@ document.querySelector('#frame1 .load_setting')
     
     data = JSON.parse(json);
     StampJsView.dataToFrom('#frame1', data);
-    document.querySelector('#frame1').click();
+    document.querySelector('#frame1 .refresh_setting').click();
 });
 
 document.querySelector('#frame1 .save_setting')
@@ -585,24 +585,12 @@ document.querySelector('#file_dialog > [name="file_name"]')
             '#file_dialog [name="id"]'
         ).value;
         
-        let stamp_selects = [];
-        
         dataset.forEach(function(json) {
             let data = JSON.parse(json)
-            stamp_selects.push(data.stamp_select);
-            StampJsView.dataToFrom(selector, data);
-            document.querySelector('#frame1 .save_setting').click();
+            StampJsView.save('frame1', data);
         });
         
-         let stamp_select = document.querySelector(
-            '#frame1 [name="stamp_select"]'
-        ).value;
-        
-        let pos = stamp_selects.indexOf(stamp_select)
-        if (pos !== -1) {
-            StampJsView.dataToFrom(selector, dataset[pos]);
-            document.querySelector('#frame1 .refresh_setting').click();
-        }
+        StampJsView.clearForm('#frame1');
     });
 });
 
