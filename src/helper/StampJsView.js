@@ -6,13 +6,13 @@ let StampJsView =  {
     /**
     *   clearForm
     *
-    *   @param string prefix
+    *   @param string selector
     */
-    clearForm:function(prefix) {
+    clearForm:function(selector) {
         let inputs = [
-            'input[type="text"][name^="' + prefix + '_"]',
-            'input[type="date"][name^="' + prefix + '_"]',
-            'input[type="number"][name^="' + prefix + '_"]',
+            selector + ' input[type="text"]',
+            selector + ' input[type="date"]',
+            selector + ' input[type="number"]',
         ];
         
         inputs.forEach(function(selector) {
@@ -23,14 +23,14 @@ let StampJsView =  {
         });
         
         let selects = document.querySelectorAll(
-            'select[name^="' + prefix + '_"] option:first-child'
+            selector + ' select option:first-child'
         );
         Array.prototype.forEach.call(selects, function(elm) {
             elm.selected = true;
         });
         
         let radios = document.querySelectorAll(
-            'input[type="radio"][name^="' + prefix + '_"]:default',
+            selector + ' input[type="radio"]:default',
         );
         Array.prototype.forEach.call(radios, function(elm) {
             elm.checked = true;
@@ -40,14 +40,14 @@ let StampJsView =  {
      /**
     *   clearFormFor
     *
-    *   @param string prefix
+    *   @param string selector
     *   @param int no
     */
-    clearFormFor:function(prefix, no) {
+    clearFormFor:function(selector, no) {
         let inputs = [
-            'input[type="text"][name^="' + prefix + '_"][name$="[' + no + ']"]',
-            'input[type="date"][name^="' + prefix + '_"][name$="[' + no + ']"]',
-            'input[type="number"][name^="' + prefix + '_"][name$="[' + no + ']"]',
+            selector + ' input[type="text"][name$="[' + no + ']"]',
+            selector + ' input[type="date"][name$="[' + no + ']"]',
+            selector + ' input[type="number"][name$="[' + no + ']"]',
         ];
         
         inputs.forEach(function(selector) {
@@ -58,14 +58,14 @@ let StampJsView =  {
         });
         
         let selects = document.querySelectorAll(
-            'select[name^="' + prefix + '_"][name$="[' + no + ']"] option:first-child'
+            selector + ' select[name$="[' + no + ']"] option:first-child'
         );
         Array.prototype.forEach.call(selects, function(elm) {
             elm.selected = true;
         });
         
         let radios = document.querySelectorAll(
-            'input[type="radio"][name^="' + prefix + '_"][name$="[' + no + ']"]:default',
+            selector + ' input[type="radio"][name$="[' + no + ']"]:default',
         );
         Array.prototype.forEach.call(radios, function(elm) {
             elm.checked = true;
@@ -75,10 +75,10 @@ let StampJsView =  {
     /**
     *   clearImage
     *
-    *   @param string prefix
+    *   @param string selector
     */
-    clearImage:function(prefix) {
-        let delete_target = document.getElementById(prefix + '_stamp_image');
+    clearImage:function(selector) {
+        let delete_target = document.querySelector(selector + ' .stamp_image');
 
         while(delete_target.firstChild){
           delete_target.removeChild(delete_target.firstChild);
@@ -88,10 +88,10 @@ let StampJsView =  {
     /**
     *   formToData
     *
-    *   @param string prefix
+    *   @param string selector
     *   @return array data
     */
-    formToData:function(prefix) {
+    formToData:function(selector) {
         let dataset = {
             stamp_select:'',
             frame:{},
@@ -99,28 +99,25 @@ let StampJsView =  {
         };
         
         let frame_inputs = document.querySelectorAll(
-            '.setting_full input[type="number"][name^="' + prefix + '_"]'
+            selector + ' .setting_full input[type="number"]'
         );
         
         Array.prototype.forEach.call(frame_inputs, function(elm) {
-            let property = elm.name.replace(prefix + '_', '');
-            dataset.frame[property] = parseInt(elm.value);
+            dataset.frame[elm.name] = parseInt(elm.value);
         });
             
         let frame_radios = document.querySelectorAll(
-            '.setting_full input[type="radio"][name^="' + prefix + '_"]:checked'
+            selector + ' .setting_full input[type="radio"]:checked'
         );
         
         Array.prototype.forEach.call(frame_radios, function(elm) {
-            let name = elm.name.replace(prefix + '_', '');
-            let property = name.replace(/\[\]/, '');
+            let property = elm.name.replace(/\[\]/, '');
             dataset.frame[property] = elm.value;
         });
         
         let funcSetData = function(elm, val) {
-            let name = elm.name.replace(prefix + '_', '');
-            let property = name.replace(/\[\d\]/, '');
-            let positions = name.match(/\[\d\]/);
+            let property = elm.name.replace(/\[\d\]/, '');
+            let positions = elm.name.match(/\[\d\]/);
             
             if (positions == null) return;
             
@@ -132,7 +129,7 @@ let StampJsView =  {
        };
         
         let data_numbers = document.querySelectorAll(
-            '.setting_parts input[type="number"][name^="' + prefix + '_"]'
+            selector + ' .setting_parts input[type="number"]'
         );
         
         Array.prototype.forEach.call(data_numbers, function(elm) {
@@ -140,8 +137,8 @@ let StampJsView =  {
         });
         
         let inputs = [
-            '.setting_parts input[type="text"][name^="' + prefix + '_"]',
-            '.setting_parts input[type="date"][name^="' + prefix + '_"]',
+            selector + ' .setting_parts input[type="text"]',
+            selector + ' .setting_parts input[type="date"]',
         ];
         
         inputs.forEach(function(selector) {
@@ -154,7 +151,7 @@ let StampJsView =  {
         });
         
         let data_selects = document.querySelectorAll(
-            '.setting_parts select[name^="' + prefix + '_"]'
+            selector + ' .setting_parts select'
         );
         
         Array.prototype.forEach.call(data_selects, function(elm) {
@@ -162,7 +159,7 @@ let StampJsView =  {
         });
         
         let stamp_select = document.querySelector(
-            'select[name^="' + prefix + '_stamp_select"]'
+            selector + ' select[name="stamp_select"]'
         );
         
         dataset.stamp_select = stamp_select.value;
@@ -182,35 +179,34 @@ let StampJsView =  {
     /**
     *   renderData
     *
-    *   @param string prefix
+    *   @param string selector
     *   @param object dataset
     *   @example <input type="text" name="frame1_stamp_width">
     *       render('frame1', data)
     */
-    dataToFrom:function(prefix, dataset) {
+    dataToFrom:function(selector, dataset) {
         let stamp_select = document.querySelector(
-            'select[name^="' + prefix + '_stamp_select"]'
+            selector + ' select'
         );
         stamp_select.value = dataset.stamp_select;
         
-        StampJsView._frameToForm(prefix, dataset);
-        StampJsView._dataToForm(prefix, dataset);
+        StampJsView._frameToForm(selector, dataset);
+        StampJsView._dataToForm(selector, dataset);
         return;
     },
     
     /**
     *   _frameToForm
     *
-    *   @param string prefix
+    *   @param string selector
     *   @param object dataset
     */
-    _frameToForm:function(prefix, dataset) {
+    _frameToForm:function(selector, dataset) {
         if (dataset.frame == null) return;
         
-        Object.keys(dataset.frame).forEach((name) => {
-            //テキスト要素
+        Object.keys(dataset.frame).forEach(function(name) {
             let elm = document.querySelector(
-                '[name="' + prefix + '_' + name + '"]'
+                selector + ' [name="' + name + '"]'
             );
             
             if (elm != null) {
@@ -218,16 +214,15 @@ let StampJsView =  {
                 return;
             }
             
-            //選択要素
             let elms = document.querySelectorAll(
-                '[name="' + prefix + '_' + name + '[]"]'
+                selector + ' [name="' + name + '[]"]'
             );
             
             if (elms.length == 0) return;
             
             let val = dataset.frame[name];
             
-            Array.prototype.forEach.call(elms, (elm) => {
+            Array.prototype.forEach.call(elms, function(elm) {
                 if (elm.value == val) {
                     switch (elm.type.toLowerCase()) {
                         case 'radio':
@@ -245,24 +240,22 @@ let StampJsView =  {
     /**
     *   _dataToForm
     *
-    *   @param string prefix
+    *   @param string selector
     *   @param object dataset
     */
-    _dataToForm:function(prefix, dataset) {
+    _dataToForm:function(selector, dataset) {
         if (dataset.data == null ||
             ! Array.isArray(dataset.data)
         ) return;
         
-        dataset.data.forEach((obj, index) => {
+        dataset.data.forEach(function(obj, index) {
             if (typeof obj != 'object') return;
             
             let data = dataset.data[index];
             
-            Object.keys(obj).forEach((name) => {
-            
-                //テキスト要素
+            Object.keys(obj).forEach(function(name) {
                 let elm = document.querySelector(
-                    '[name="' + prefix + '_' + name + '[' + (index + 1) + ']"]'
+                    selector + ' [name="' + name + '[' + (index + 1) + ']"]'
                 );
                 
                 if (elm == null) return;
@@ -300,30 +293,30 @@ let StampJsView =  {
     *   load
     *
     *   @param string id
-    *   @param string content
+    *   @param string stamp_select
     *   @return object
     */
-    load:function(id, dataset) {
+    load:function(id, stamp_select) {
         return window.localStorage.getItem(
-            id + '_' + dataset.stamp_select
+            id + '_' + stamp_select
         );
     },
     
     /**
     *   disableTo
     *
-    *   @param string prefix
+    *   @param string selector
     *   @param array columnNos
     */
-    disableTo:function(prefix, columnNos) {
+    disableTo:function(selector, columnNos) {
         
         for (let i = 1; i <= 4; i++) {
             if (columnNos.includes(i)) {
-                StampHelper.disableTableColumn('.setting_parts', i+1);
-                StampJsView.clearFormFor(prefix, i);
+                StampHelper.disableTableColumn(selector + ' .setting_parts', i+1);
+                StampJsView.clearFormFor(selector, i);
                 
             } else {
-                StampHelper.enableTableColumn('.setting_parts', i+1);
+                StampHelper.enableTableColumn(selector + ' .setting_parts', i+1);
             }
         }
     },

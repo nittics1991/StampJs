@@ -70,12 +70,12 @@ footer {
 <div id="frame1" class="frame">
 	<h4>スタンプ StampJs</h4>
 	<div class="stamp_area">
-		<div id="frame1_stamp_image"></div>
+		<div class="stamp_image"></div>
 	</div>
 	<div class="setting_area">
         <ul class="stamp_buttons">
             <li>
-                <select name="frame1_stamp_select">
+                <select name="stamp_select">
                     <option value=""></option>
                     <option value="dateStamp">日付印</option>
                     <option value="signetStamp">認印</option>
@@ -89,12 +89,12 @@ footer {
                 </select>
             </li>
             
-            <li><button type="button" id="refresh_setting">更新</button></li>
-            <li><button type="button" id="load_setting">読込</button></li>
-            <li><button type="button" id="save_setting">保存</button></li>
-            <li><button type="button" id="remove_setting">削除</button></li>
-            <li><button type="button" id="upload_setting">アップロード</button></li>
-            <li><button type="button" id="download_setting">ダウンロード</button></li>
+            <li><button type="button" class="refresh_setting">更新</button></li>
+            <li><button type="button" class="load_setting">読込</button></li>
+            <li><button type="button" class="save_setting">保存</button></li>
+            <li><button type="button" class="remove_setting">削除</button></li>
+            <li><button type="button" class="upload_setting">アップロード</button></li>
+            <li><button type="button" class="download_setting">ダウンロード</button></li>
         </ul>
         
 		<table class="setting_full">
@@ -108,72 +108,72 @@ footer {
                 <tr class="stamp_width">
 					<th>種別</th>
 					<td>
-						<label><input type="radio" name="frame1_stamp_type[]" value="circle" checked></inpit>丸印</label>
-						<label><input type="radio" name="frame1_stamp_type[]" value="box"></inpit>角印</label>
+						<label><input type="radio" name="stamp_type[]" value="circle" checked></inpit>丸印</label>
+						<label><input type="radio" name="stamp_type[]" value="box"></inpit>角印</label>
                     </td>
 				</tr>
 				
                 <tr class="stamp_width">
 					<th>全体幅</th>
 					<td>
-						<input type="number" name="frame1_stamp_width" value="38"></inpit>
+						<input type="number" name="stamp_width" value="38"></inpit>
 					</td>
 				</tr>
 				
 				<tr class="stamp_height">
 					<th>全体高</th>
 					<td>
-						<input type="number" name="frame1_stamp_height" value="38"></inpit>
+						<input type="number" name="stamp_height" value="38"></inpit>
 					</td>
 				</tr>
 				
 				<tr class="line_weight">
 					<th>線幅</th>
 					<td>
-						<input type="number" name="frame1_line_weight" value="2"></inpit>
+						<input type="number" name="line_weight" value="2"></inpit>
 					</td>
 				</tr>
 				
 				<tr class="stamp_color">
 					<th>印影色</th>
 					<td>
-						<label><input type="radio" name="frame1_stamp_color[]" value="red" checked></inpit>赤</label>
-						<label><input type="radio" name="frame1_stamp_color[]" value="black"></inpit>黒</label>
+						<label><input type="radio" name="stamp_color[]" value="red" checked></inpit>赤</label>
+						<label><input type="radio" name="stamp_color[]" value="black"></inpit>黒</label>
 					</td>
 				</tr>
 				
 				<tr class="border_direction">
 					<th>仕切線</th>
 					<td>
-						<label><input type="radio" name="frame1_border_direction[]" value="H" checked></inpit>水平</label>
-						<label><input type="radio" name="frame1_border_direction[]" value="V"></inpit>垂直</label>
+						<label><input type="radio" name="border_direction[]" value="H" checked></inpit>水平</label>
+						<label><input type="radio" name="border_direction[]" value="V"></inpit>垂直</label>
 					</td>
 				</tr>
 				
 				<tr class="text_direction">
 					<th>文字方向</th>
 					<td>
-						<label><input type="radio" name="frame1_text_direction[]" value="H" checked></inpit>水平</label>
-						<label><input type="radio" name="frame1_text_direction[]" value="V"></inpit>垂直</label>
+						<label><input type="radio" name="text_direction[]" value="H" checked></inpit>水平</label>
+						<label><input type="radio" name="text_direction[]" value="V"></inpit>垂直</label>
 					</td>
 				</tr>
 				
 				<tr class="text_placement">
 					<th>文字配置方向</th>
 					<td>
-						<label><input type="radio" name="frame1_text_placement[]" value="H" checked></inpit>水平</label>
-						<label><input type="radio" name="frame1_text_placement[]" value="V"></inpit>垂直</label>
+						<label><input type="radio" name="text_placement[]" value="H" checked></inpit>水平</label>
+						<label><input type="radio" name="text_placement[]" value="V"></inpit>垂直</label>
 					</td>
 				</tr>
                 
 				<tr class="option_position">
 					<th>追加情報</th>
 					<td>
-						<label><input type="radio" name="frame1_option_position[]" value="non" checked></inpit>無</label>
-						<label><input type="radio" name="frame1_option_position[]" value="left"></inpit>左</label>
-						<label><input type="radio" name="frame1_option_position[]" value="right"></inpit>右</label>
-						<label><input type="radio" name="frame1_option_position[]" value="top"></inpit>上</label>
-						<label><input type="radio" name="frame1_option_position[]" value="bottom"></inpit>下</label>
+						<label><input type="radio" name="option_position[]" value="non" checked></inpit>無</label>
+						<label><input type="radio" name="option_position[]" value="left"></inpit>左</label>
+						<label><input type="radio" name="option_position[]" value="right"></inpit>右</label>
+						<label><input type="radio" name="option_position[]" value="top"></inpit>上</label>
+						<label><input type="radio" name="option_position[]" value="bottom"></inpit>下</label>
 					</td>
 				</tr>
 			</tbody>
@@ -201,76 +201,76 @@ footer {
 				<tr class="stamp_text">
 					<th>表示文字</th>
 					<td>
-						<input type="text" name="frame1_stamp_text[1]"></inpit>
+						<input type="text" name="stamp_text[1]"></inpit>
 					</td>
 					<td>
-						<input type="text" name="frame1_stamp_text[2]"></inpit>
+						<input type="text" name="stamp_text[2]"></inpit>
 					</td>
 					<td>
-						<input type="text" name="frame1_stamp_text[3]"></inpit>
+						<input type="text" name="stamp_text[3]"></inpit>
 					</td>
 					<td>
-						<input type="text" name="frame1_stamp_text[4]"></inpit>
+						<input type="text" name="stamp_text[4]"></inpit>
 					</td>
 				</tr>
 				
 				<tr class="font_family">
 					<th>フォント</th>
 					<td>
-						<select name="frame1_font_family[1]"></select>
+						<select name="font_family[1]"></select>
 					</td>
 					<td>
-						<select name="frame1_font_family[2]"></select>
+						<select name="font_family[2]"></select>
 					</td>
 					<td>
-						<select name="frame1_font_family[3]"></select>
+						<select name="font_family[3]"></select>
 					</td>
 					<td>
-						<select name="frame1_font_family[4]"></select>
+						<select name="font_family[4]"></select>
 					</td>
 				</tr>
 				
 				<tr class="font_size">
 					<th>サイズ</th>
 					<td>
-						<input type="number" name="frame1_font_size[1]" value="10"></inpit>
+						<input type="number" name="font_size[1]" value="10"></inpit>
 					</td>
 					<td>
-						<input type="number" name="frame1_font_size[2]" value="10"></inpit>
+						<input type="number" name="font_size[2]" value="10"></inpit>
 					</td>
 					<td>
-						<input type="number" name="frame1_font_size[3]" value="10"></inpit>
+						<input type="number" name="font_size[3]" value="10"></inpit>
 					</td>
 					<td>
-						<input type="number" name="frame1_font_size[4]" value="10"></inpit>
+						<input type="number" name="font_size[4]" value="10"></inpit>
 					</td>
 				</tr>
 				
 				<tr class="text_align">
 					<th>横配置</th>
 					<td>
-						<select name="frame1_text_align[1]">
+						<select name="text_align[1]">
 							<option value="left">左</option>
 							<option value="center" selected>中央</option>
 							<option value="right">右</option>
 						</select>
 					</td>
 					<td>
-						<select name="frame1_text_align[2]">
+						<select name="text_align[2]">
 							<option value="left">左</option>
 							<option value="center" selected>中央</option>
 							<option value="right">右</option>
 						</select>
 					</td>
 					<td>
-						<select name="frame1_text_align[3]">
+						<select name="text_align[3]">
 							<option value="left">左</option>
 							<option value="center" selected>中央</option>
 							<option value="right">右</option>
 						</select>
 					</td>
 					<td>
-						<select name="frame1_text_align[4]">
+						<select name="text_align[4]">
 							<option value="left">左</option>
 							<option value="center">中央</option>
 							<option value="right" selected>右</option>
@@ -281,28 +281,28 @@ footer {
 				<tr class="vertical_align">
 					<th>縦配置</th>
 					<td>
-						<select name="frame1_vertical_align[1]">
+						<select name="vertical_align[1]">
 							<option value="top">上</option>
 							<option value="middle">中央</option>
 							<option value="bottom" selected>下</option>
 						</select>
 					</td>
 					<td>
-						<select name="frame1_vertical_align[2]">
+						<select name="vertical_align[2]">
 							<option value="top">上</option>
 							<option value="middle" selected>中央</option>
 							<option value="bottom">下</option>
 						</select>
 					</td>
 					<td>
-						<select name="frame1_vertical_align[3]">
+						<select name="vertical_align[3]">
 							<option value="top" selected>上</option>
 							<option value="middle">中央</option>
 							<option value="bottom">下</option>
 						</select>
 					</td>
 					<td>
-						<select name="frame1_vertical_align[4]">
+						<select name="vertical_align[4]">
 							<option value="top" selected>上</option>
 							<option value="middle">中央</option>
 							<option value="bottom">下</option>
@@ -313,16 +313,16 @@ footer {
 				<tr class="margin_size">
 					<th>マージン</th>
 					<td>
-						<input type="number" name="frame1_margin_size[1]" value="1"></inpit>
+						<input type="number" name="margin_size[1]" value="1"></inpit>
 					</td>
 					<td>
-						<input type="number" name="frame1_margin_size[2]" value="1"></inpit>
+						<input type="number" name="margin_size[2]" value="1"></inpit>
 					</td>
 					<td>
-						<input type="number" name="frame1_margin_size[3]" value="1"></inpit>
+						<input type="number" name="margin_size[3]" value="1"></inpit>
 					</td>
 					<td>
-						<input type="number" name="frame1_margin_size[4]" value="1"></inpit>
+						<input type="number" name="margin_size[4]" value="1"></inpit>
 					</td>
 				</tr>
 				
@@ -428,75 +428,79 @@ var inidata = {
 
 //action
 window.addEventListener('load', function() {
-    StampJsView.dataToFrom('frame1', inidata);
-	let stamp = new StampJs('#frame1_stamp_image', inidata);
+    StampJsView.dataToFrom('#frame1', inidata);
+	let stamp = new StampJs('#frame1 .stamp_image', inidata);
 	stamp.render();
     let imgUri = StampHelper.exchangeToImage('canvas');
 });
 
-document.querySelector('#refresh_setting')
+document.querySelector('#frame1 .refresh_setting')
     .addEventListener('click', function(e) {
 	
-    StampJsView.clearImage('frame1');
+    StampJsView.clearImage('#frame1');
     
-    let data = StampJsView.formToData('frame1');
+    let data = StampJsView.formToData('#frame1');
     let factory = new StampFactory();
 	let builder = factory.builder();
 	let stamp;
     
     switch (data.stamp_select) {
         case 'dateStamp':
-            stamp = builder.dateStamp('#frame1_stamp_image', data);
+            stamp = builder.dateStamp('#frame1 .stamp_image', data);
             break;
         case 'signetStamp':
-            stamp = builder.signetStamp('#frame1_stamp_image', data);
+            stamp = builder.signetStamp('#frame1 .stamp_image', data);
             break;
         case 'squareStamp':
-            stamp = builder.squareStamp('#frame1_stamp_image', data);
+            stamp = builder.squareStamp('#frame1 .stamp_image', data);
             break;
         case 'companyStamp':
-            stamp = builder.companyStamp('#frame1_stamp_image', data);
+            stamp = builder.companyStamp('#frame1 .stamp_image', data);
             break;
         case '':
             return;
         default:
-            stamp = new StampJs('#frame1_stamp_image', data);
+            stamp = new StampJs('#frame1 .stamp_image', data);
             break;
     }
 	stamp.render();
     let imgUri = StampHelper.exchangeToImage('canvas');
 });
 
-document.querySelector('#load_setting')
+document.querySelector('#frame1 .load_setting')
     .addEventListener('click', function(e) {
     
+    let select = document.querySelector(
+        '#frame1 [name="stamp_select"]'
+    );
+    
     if (!window.confirm('May I load ?')) return;
-    let json = StampJsView.load('#frame1_stamp_image', data);
+    let json = StampJsView.load('frame1', select.value);
     
     if (json == null) return;
     
     data = JSON.parse(json);
-    StampJsView.dataToFrom('frame1', data);
-    document.querySelector('#refresh_setting').click();
+    StampJsView.dataToFrom('#frame1', data);
+    document.querySelector('#frame1').click();
 });
 
-document.querySelector('#save_setting')
+document.querySelector('#frame1 .save_setting')
     .addEventListener('click', function(e) {
     
     if (!window.confirm('May I save ?')) return;
-    let data = StampJsView.formToData('frame1');
-    StampJsView.save('#frame1_stamp_image', data);
+    let data = StampJsView.formToData('#frame1');
+    StampJsView.save('frame1', data);
 });
 
-document.querySelector('#remove_setting')
+document.querySelector('#frame1 .remove_setting')
     .addEventListener('click', function(e) {
     
     if (!window.confirm('May I remove ?')) return;
-    let data = StampJsView.formToData('frame1');
-    StampJsView.remove('#frame1_stamp_image', data);
+    let data = StampJsView.formToData('#frame1');
+    StampJsView.remove('frame1', data);
 });
 
-document.querySelector('#upload_setting')
+document.querySelector('#frame1 .upload_setting')
     .addEventListener('click', function(e) {
     
     document.querySelector('#file_dialog')
@@ -504,47 +508,47 @@ document.querySelector('#upload_setting')
 });
 
 //clear
-document.querySelector('button[name="clear1"]')
+document.querySelector('#frame1 button[name="clear1"]')
     .addEventListener('click', function(e) {
     
-    StampJsView.clearFormFor('frame1', 1);
+    StampJsView.clearFormFor('#frame1', 1);
 });
 
-document.querySelector('button[name="clear2"]')
+document.querySelector('#frame1 button[name="clear2"]')
     .addEventListener('click', function(e) {
     
-    StampJsView.clearFormFor('frame1', 2);
+    StampJsView.clearFormFor('#frame1', 2);
 });
 
-document.querySelector('button[name="clear3"]')
+document.querySelector('#frame1 button[name="clear3"]')
     .addEventListener('click', function(e) {
     
-    StampJsView.clearFormFor('frame1', 3);
+    StampJsView.clearFormFor('#frame1', 3);
 });
 
-document.querySelector('button[name="clear4"]')
+document.querySelector('#frame1 button[name="clear4"]')
     .addEventListener('click', function(e) {
     
-    StampJsView.clearFormFor('frame1', 4);
+    StampJsView.clearFormFor('#frame1', 4);
 });
 
 //selectbox
-document.querySelector('[name="frame1_stamp_select"]')
+document.querySelector('#frame1 [name="stamp_select"]')
     .addEventListener('change', function(e) {
     
     switch (e.target.value) {
         case 'dateStamp':
-            StampJsView.disableTo('frame1', []);
+            StampJsView.disableTo('#frame1', []);
             break;
         case 'signetStamp':
-            StampJsView.disableTo('frame1', [2,3,4]);
+            StampJsView.disableTo('#frame1', [2,3,4]);
             break;
         case 'squareStamp':
         case 'companyStamp':
-            StampJsView.disableTo('frame1', [4]);
+            StampJsView.disableTo('#frame1', [4]);
             break;
         default:
-            StampJsView.disableTo('frame1', []);
+            StampJsView.disableTo('#frame1', []);
             break;
     }
 });
@@ -555,7 +559,8 @@ document.querySelector('[name="frame1_stamp_select"]')
 
 
 
-
+//////////////
+//frame1選択必要で!!!!!!!!!!!!!!
 
 
 //dialog
