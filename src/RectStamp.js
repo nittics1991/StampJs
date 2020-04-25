@@ -59,7 +59,7 @@ RectStamp.prototype._calcFrame = function() {
             this._base_position[0],
             this._base_position[1],
             this._stampFrame.stamp_width - this._stampFrame.line_weight,
-            this._stampFrame.stamp_width - this._stampFrame.line_weight
+            this._stampFrame.stamp_height - this._stampFrame.line_weight
         ]
     }];
 };

@@ -85,8 +85,10 @@ StampFrame.prototype._doValidate = function() {
         if (!isFinite(this.stamp_height))
             throw 'stamp_height';
 
-        if (this.stamp_height !== this.stamp_width)
-            throw 'stamp_height/stamp_width';
+        if (this.isTypeCircle() &&
+            this.stamp_height !== this.stamp_width)
+            
+            throw 'stamp_height!=stamp_width';
 
         if (!isFinite(this.line_weight))
             throw 'line_weight';

@@ -43,13 +43,10 @@ RectHorizonBorder.prototype._exec = function() {
 
     for (let i = 1; i < data_count; i++) {
         let y = height * i - radius;
-        let pos = Math.sqrt(radius * radius - y * y);
-
-        let x1 = this._base_position[0] + radius - pos
-             + this._stampFrame.line_weight;
-        let x2 = this._base_position[0] + radius + pos
-             + this._stampFrame.line_weight;
-
+        
+        let x1 = this._base_position[0];
+        let x2 = this._stampFrame.stamp_width - this._stampFrame.line_weight;
+        
         y += radius + this._base_position[1]
              + this._stampFrame.line_weight;
 
