@@ -338,4 +338,28 @@ let StampJsView =  {
             }
         }
     },
+    
+    /**
+    *   hiddenInStandard
+    *
+    *   @param string selector
+    *   @param array columnNos
+    */
+    hiddenInStandard:function(selector, dataset) {
+        let inputs = document.querySelector(
+            selector + ' .setting_full input'
+        );
+        
+        Array.prototype.forEach.call(inputs, function(elm)) {
+            
+            
+            
+            
+        });
+    },
+    
+    
+    
+    
+    
 };
