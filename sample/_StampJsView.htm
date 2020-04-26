@@ -105,7 +105,7 @@ footer {
 				</tr>
 			</thead>
 			<tbody>
-                <tr class="stamp_width">
+                <tr class="stamp_type">
 					<th>種別</th>
 					<td>
 						<label><input type="radio" name="stamp_type[]" value="circle" ></inpit>丸印</label>
@@ -435,12 +435,13 @@ var inidata = {
 	],
 };
 
-//action
+//load
 window.addEventListener('load', function() {
     StampJsView.dataToFrom('#frame1', inidata);
     document.querySelector('#frame1 .refresh_setting').click();
 });
 
+//main button
 document.querySelector('#frame1 .refresh_setting')
     .addEventListener('click', function(e) {
 	
@@ -523,7 +524,7 @@ document.querySelector('#frame1 .download_setting')
     StampJsView.download('frame1', '#frame1');
 });
 
-//clear
+//clear button
 document.querySelector('#frame1 button[name="clear1"]')
     .addEventListener('click', function(e) {
     
@@ -574,21 +575,24 @@ document.querySelector('#frame1 [name="stamp_select"]')
 });
 
 //stamp_type
-document.querySelector('#frame1 [name="stamp_type[]"]')
-    .addEventListener('change', function(e) {
-    
-    let stamp_height = document.querySelector('#frame1 [name="stamp_height"]');
-    let stamp_width = document.querySelector('#frame1 [name="stamp_width"]');
-    
-    if (e.target.value == 'circle') {
-        stamp_height.value = stamp_width.value;
-        stamp_height.style.visibility = 'hidden';
-        stamp_height.parentNode.style.visibility = 'hidden';
-    } else {
-        stamp_height.style.visibility = 'visible';
-        stamp_height.parentNode.style.visibility = 'visible';
+Array.prototype.forEach.call(
+    document.querySelectorAll('#frame1 [name="stamp_type[]"]'),
+    function(elm) {
+        elm.addEventListener('change', function(e) {
+            let stamp_height = document.querySelector('#frame1 [name="stamp_height"]');
+            let stamp_width = document.querySelector('#frame1 [name="stamp_width"]');
+            
+            if (e.target.value == 'circle') {
+                stamp_height.value = stamp_width.value;
+                stamp_height.style.visibility = 'hidden';
+                stamp_height.parentNode.style.visibility = 'hidden';
+            } else {
+                stamp_height.style.visibility = 'visible';
+                stamp_height.parentNode.style.visibility = 'visible';
+            }
+        });
     }
-});
+);
 
 //dialog
 document.querySelector('#file_dialog > [name="file_name"]')
