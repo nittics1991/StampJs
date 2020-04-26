@@ -540,7 +540,7 @@ document.querySelector('#frame1 button[name="clear4"]')
     StampJsView.clearFormFor('#frame1', 4);
 });
 
-//selectbox
+//stamp_select
 document.querySelector('#frame1 [name="stamp_select"]')
     .addEventListener('change', function(e) {
     
@@ -562,6 +562,23 @@ document.querySelector('#frame1 [name="stamp_select"]')
             StampJsView.disableTo('#frame1', []);
             StampJsView.visibleInStandard('#frame1', e.target.value);
             break;
+    }
+});
+
+//stamp_type
+document.querySelector('#frame1 [name="stamp_type[]"]')
+    .addEventListener('change', function(e) {
+    
+    let stamp_height = document.querySelector('#frame1 [name="stamp_height"]');
+    let stamp_width = document.querySelector('#frame1 [name="stamp_width"]');
+    
+    if (e.target.value == 'circle') {
+        stamp_height.value = stamp_width.value;
+        stamp_height.style.visibility = 'hidden';
+        stamp_height.parentNode.style.visibility = 'hidden';
+    } else {
+        stamp_height.style.visibility = 'visible';
+        stamp_height.parentNode.style.visibility = 'visible';
     }
 });
 
