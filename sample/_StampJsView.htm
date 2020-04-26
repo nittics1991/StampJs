@@ -454,9 +454,11 @@ document.querySelector('#frame1 .refresh_setting')
     
     switch (data.stamp_select) {
         case 'dateStamp':
+            data.frame.stamp_height = data.frame.stamp_width;
             stamp = builder.dateStamp('#frame1 .stamp_image', data);
             break;
         case 'signetStamp':
+            data.frame.stamp_height = data.frame.stamp_width;
             stamp = builder.signetStamp('#frame1 .stamp_image', data);
             break;
         case 'squareStamp':
@@ -468,6 +470,9 @@ document.querySelector('#frame1 .refresh_setting')
         case '':
             return;
         default:
+            if (data.frame.stamp_type == 'circle') {
+                data.frame.stamp_height = data.frame.stamp_width;
+            }
             stamp = new StampJs('#frame1 .stamp_image', data);
             break;
     }
@@ -573,47 +578,6 @@ document.querySelector('#frame1 [name="stamp_select"]')
             break;
     }
 });
-
-//stamp_type
-document.querySelector('#frame1 [name="stamp_type[]"][value="circle"]')
-    .addEventListener('change', function(e) {
-    
-    let stamp_height = document.querySelector('#frame1 [name="stamp_height"]');
-    let stamp_width = document.querySelector('#frame1 [name="stamp_width"]');
-    
-    stamp_height.value = stamp_width.value;
-    stamp_height.style.visibility = 'hidden';
-    stamp_height.parentNode.style.visibility = 'hidden';
-});
-
-document.querySelector('#frame1 [name="stamp_type[]"][value="rect"]')
-    .addEventListener('change', function(e) {
-    
-    let stamp_height = document.querySelector('#frame1 [name="stamp_height"]');
-    
-    stamp_height.style.visibility = 'visible';
-    stamp_height.parentNode.style.visibility = 'visible';
-});
-
-
-//Array.prototype.forEach.call(
-    //document.querySelectorAll('#frame1 [name="stamp_type[]"]'),
-    //function(elm) {
-        //elm.addEventListener('change', function(e) {
-            //let stamp_height = document.querySelector('#frame1 [name="stamp_height"]');
-            //let stamp_width = document.querySelector('#frame1 [name="stamp_width"]');
-            
-            //if (e.target.value == 'circle') {
-                //stamp_height.value = stamp_width.value;
-                //stamp_height.style.visibility = 'hidden';
-                //stamp_height.parentNode.style.visibility = 'hidden';
-            //} else {
-                //stamp_height.style.visibility = 'visible';
-                //stamp_height.parentNode.style.visibility = 'visible';
-            //}
-        //});
-    //}
-//);
 
 //dialog
 document.querySelector('#file_dialog > [name="file_name"]')
