@@ -31,7 +31,7 @@ StampBuilder.prototype.dateStamp = function(selector, dataset) {
     dataset.frame.border_direction = 'H';
     dataset.frame.text_placement = 'V';
     dataset.frame.text_direction = 'H';
-    dataset.frame.option_position = 'non';
+    //dataset.frame.option_position = 'non';
 
     return this._build(selector, dataset);
 };

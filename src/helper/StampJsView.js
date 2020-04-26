@@ -343,8 +343,9 @@ let StampJsView =  {
     *   hiddenInStandard
     *
     *   @param string selector
+    *   @param string stamp_select
     */
-    hiddenInStandard:function(selector) {
+    hiddenInStandard:function(selector, stamp_select) {
         let hidden_targets = [
         'stamp_type[]',
         'stamp_color[]',
@@ -360,6 +361,14 @@ let StampJsView =  {
         
         Array.prototype.forEach.call(inputs, function(elm) {
             if (hidden_targets.includes(elm.name)) {
+                if (stamp_select == 'dateStamp' &&
+                    elm.name == 'option_position[]'
+                ) {
+                    elm.style.visibility = 'visible';
+                    elm.parentNode.style.visibility = 'visible';
+                    return;
+                }
+                
                 elm.style.visibility = 'hidden';
                 elm.parentNode.style.visibility = 'hidden';
             }
@@ -370,8 +379,9 @@ let StampJsView =  {
     *   hiddenInStandard
     *
     *   @param string selector
+    *   @param string stamp_select
     */
-    visibleInStandard:function(selector) {
+    visibleInStandard:function(selector, stamp_select) {
         let hidden_targets = [
         'stamp_type[]',
         'stamp_color[]',
