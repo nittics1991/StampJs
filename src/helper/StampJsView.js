@@ -343,23 +343,54 @@ let StampJsView =  {
     *   hiddenInStandard
     *
     *   @param string selector
-    *   @param array columnNos
     */
-    hiddenInStandard:function(selector, dataset) {
-        let inputs = document.querySelector(
+    hiddenInStandard:function(selector) {
+        let hidden_targets = [
+        'stamp_type[]',
+        'stamp_color[]',
+        'border_direction[]',
+        'text_placement[]',
+        'text_direction[]',
+        'option_position[]',
+        ];
+        
+        let inputs = document.querySelectorAll(
             selector + ' .setting_full input'
         );
         
-        Array.prototype.forEach.call(inputs, function(elm)) {
-            
-            
-            
-            
+        Array.prototype.forEach.call(inputs, function(elm) {
+            if (hidden_targets.includes(elm.name)) {
+                elm.style.visibility = 'hidden';
+                elm.parentNode.style.visibility = 'hidden';
+            }
         });
     },
     
-    
-    
-    
+    /**
+    *   hiddenInStandard
+    *
+    *   @param string selector
+    */
+    visibleInStandard:function(selector) {
+        let hidden_targets = [
+        'stamp_type[]',
+        'stamp_color[]',
+        'border_direction[]',
+        'text_placement[]',
+        'text_direction[]',
+        'option_position[]',
+        ];
+        
+        let inputs = document.querySelectorAll(
+            selector + ' .setting_full input'
+        );
+        
+        Array.prototype.forEach.call(inputs, function(elm) {
+            if (hidden_targets.includes(elm.name)) {
+                elm.style.visibility = 'visible';
+                elm.parentNode.style.visibility = 'visible';
+            }
+        });
+    },
     
 };

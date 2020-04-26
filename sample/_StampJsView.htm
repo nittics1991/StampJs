@@ -430,6 +430,7 @@ var inidata = {
 //action
 window.addEventListener('load', function() {
     StampJsView.dataToFrom('#frame1', inidata);
+    StampJsView.hiddenInStandard('#frame1');
 	let stamp = new StampJs('#frame1 .stamp_image', inidata);
 	stamp.render();
     let imgUri = StampHelper.exchangeToImage('canvas');
@@ -549,16 +550,20 @@ document.querySelector('#frame1 [name="stamp_select"]')
     switch (e.target.value) {
         case 'dateStamp':
             StampJsView.disableTo('#frame1', []);
+            StampJsView.hiddenInStandard('#frame1');
             break;
         case 'signetStamp':
             StampJsView.disableTo('#frame1', [2,3,4]);
+            StampJsView.hiddenInStandard('#frame1');
             break;
         case 'squareStamp':
         case 'companyStamp':
             StampJsView.disableTo('#frame1', [4]);
+            StampJsView.hiddenInStandard('#frame1');
             break;
         default:
             StampJsView.disableTo('#frame1', []);
+            StampJsView.visibleInStandard('#frame1');
             break;
     }
 });
