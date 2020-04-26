@@ -41,24 +41,35 @@ footer {
     height:40px;
 }
 
-#file_dialog {
+.stamp_dialog {
     border:2px ridge #000000;
     display:none;
     z-index:10;
     position:absolute;
     left:40%;
     top:30%;
-    width:300px;
     background-color:#ffffff;
 }
 
-#file_dialog > div:first-child {
+.stamp_dialog > div:first-child {
     background-color:#c0c0c0;
 }
 
-#file_dialog > div:last-child {
+.stamp_dialog > div:last-child {
     display:flex;
     justify-content:center
+}
+
+#file_dialog {
+    width:300px;
+}
+
+#date_dialog {
+    width:250px;
+}
+
+input[type="date"] {
+    height:1rem;
 }
 
 </style>
@@ -95,6 +106,7 @@ footer {
             <li><button type="button" class="remove_setting">削除</button></li>
             <li><button type="button" class="upload_setting">アップロード</button></li>
             <li><button type="button" class="download_setting">ダウンロード</button></li>
+            <li><button type="button" class="date_setting">日付選択</button></li>
         </ul>
         
 		<table class="setting_full">
@@ -340,13 +352,25 @@ footer {
 	</div>
 </div>
           
-<div id="file_dialog" draggable="true">
+<div id="file_dialog" class="stamp_dialog" draggable="true">
     <div>ファイル選択</div>
     <input type="file" name="file_name">
     <input type="hidden" name="id">
+    <div><button type="button" class="close_button">閉じる</button></div>
+</div>
+
+<div id="date_dialog" class="stamp_dialog" draggable="true">
+    <div>日付入力</div>
+    <div><label>日付<input type="date" name="date_input"></label></div>
+    <div><label>書式<input type="text" name="date_format"></label></div>
     <div>
-        <button type="button" id="file_dialog_close_button">閉じる</button>
+        <label><input type="radio" name="date_target[]" value="1"></inpit>1番</label>
+        <label><input type="radio" name="date_target[]" value="2" checked></inpit>2番</label>
+        <label><input type="radio" name="date_target[]" value="3"></inpit>3番</label>
+        <label><input type="radio" name="date_target[]" value="4"></inpit>4番</label>
     </div>
+    <input type="hidden" name="id">
+    <div><button type="button" class="close_button">閉じる</button></div>
 </div>
 
 </div>
@@ -529,6 +553,13 @@ document.querySelector('#frame1 .download_setting')
     StampJsView.download('frame1', '#frame1');
 });
 
+document.querySelector('#frame1 .date_setting')
+    .addEventListener('click', function(e) {
+    
+    document.querySelector('#date_dialog')
+        .style.display = "block";
+});
+
 //clear button
 document.querySelector('#frame1 button[name="clear1"]')
     .addEventListener('click', function(e) {
@@ -580,10 +611,53 @@ document.querySelector('#frame1 [name="stamp_select"]')
 });
 
 //dialog
+Array.prototype.forEach.call(
+    document.querySelectorAll('.close_button'),
+    function(elm) {
+        elm.addEventListener('click', function(e) {
+            e.target.parentNode.parentNode.style.display = "none";
+        });
+    }
+);
+
+Array.prototype.forEach.call(
+    document.querySelectorAll('.stamp_dialog'),
+    function(elm) {
+        elm.addEventListener('dragstart', function(e) {
+            e.dataTransfer.setData("text/plain", "");
+            e.stopPropagation();
+        });
+    }
+);
+
+document.querySelector('#main')
+    .addEventListener('dragover', function(e) {
+    
+    e.preventDefault();
+});
+
+document.querySelector('#main')
+    .addEventListener('dragenter', function(e) {
+    
+    e.preventDefault();
+});
+
+document.querySelector('#main')
+    .addEventListener('drop', function(e) {
+    
+    e.preventDefault();
+    e.stopPropagation();
+    
+    let target = document.querySelector('.stamp_dialog')
+    target.style.top = e.clientY + 'px';
+    target.style.left = e.clientX + 'px';
+});
+
+//file dialog
 document.querySelector('#file_dialog > [name="file_name"]')
     .addEventListener('change', function(e) {
     
-    document.querySelector('#file_dialog')
+    document.querySelector('.stamp_dialog')
         .style.display = "none";
     
     let reader = new FileReader();
@@ -611,42 +685,8 @@ document.querySelector('#file_dialog > [name="file_name"]')
     });
 });
 
-document.querySelector('#file_dialog_close_button')
-    .addEventListener('click', function(e) {
-    
-    document.querySelector('#file_dialog')
-        .style.display = "none";
-});
 
-document.querySelector('#file_dialog')
-    .addEventListener('dragstart', function(e) {
-    
-    e.dataTransfer.setData("text/plain", "");
-    e.stopPropagation();
-});
 
-document.querySelector('#main')
-    .addEventListener('dragover', function(e) {
-    
-    e.preventDefault();
-});
-
-document.querySelector('#main')
-    .addEventListener('dragenter', function(e) {
-    
-    e.preventDefault();
-});
-
-document.querySelector('#main')
-    .addEventListener('drop', function(e) {
-    
-    e.preventDefault();
-    e.stopPropagation();
-    
-    let target = document.querySelector('#file_dialog')
-    target.style.top = e.clientY + 'px';
-    target.style.left = e.clientX + 'px';
-});
 
 </script>
 	
