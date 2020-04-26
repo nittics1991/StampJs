@@ -72,6 +72,10 @@ input[type="date"] {
     height:1rem;
 }
 
+input:invalid {
+    border-color:red;
+}
+
 </style>
 
 </head>
@@ -361,8 +365,8 @@ input[type="date"] {
 
 <div id="date_dialog" class="stamp_dialog" draggable="true">
     <div>日付入力</div>
-    <div><label>日付<input type="date" name="date_input"></label></div>
-    <div><label>書式<input type="text" name="date_format"></label></div>
+    <div><label>日付<input type="date" name="date_input" required></label></div>
+    <div><label>書式<input type="text" name="date_format" required title="@see Momentjs"></label></div>
     <div>
         <label><input type="radio" name="date_target[]" value="1"></inpit>1番</label>
         <label><input type="radio" name="date_target[]" value="2" checked></inpit>2番</label>
@@ -370,12 +374,17 @@ input[type="date"] {
         <label><input type="radio" name="date_target[]" value="4"></inpit>4番</label>
     </div>
     <input type="hidden" name="id">
-    <div><button type="button" class="close_button">閉じる</button></div>
+    <div>
+        <button type="button" class="exec_button">設定</button>
+        <button type="button" class="close_button">閉じる</button>
+    </div>
 </div>
 
 </div>
 
 <footer></footer>
+
+<script src="../lib/momentjs.js"></script> 
 
 <script src="../src/StampFactory.js"></script> 
 <script src="../src/StampBuilder.js"></script> 
@@ -660,7 +669,7 @@ document.querySelector('#main')
 });
 
 //file dialog
-document.querySelector('#file_dialog > [name="file_name"]')
+document.querySelector('#file_dialog [name="file_name"]')
     .addEventListener('change', function(e) {
     
     document.querySelector('.stamp_dialog')
@@ -691,8 +700,31 @@ document.querySelector('#file_dialog > [name="file_name"]')
     });
 });
 
-
-
+//date dialog
+document.querySelector('#date_dialog .exec_button')
+    .addEventListener('click', function(e) {
+    
+    document.querySelector('.stamp_dialog')
+        .style.display = "none";
+    
+    let date_input = document.querySelector(
+        '#date_dialog [name="date_input"]'
+    ).value;
+    
+    let date_format = document.querySelector(
+        '#date_dialog [name="date_format"]'
+    ).value;
+    
+    let date_target = document.querySelector(
+        '#date_dialog [name="date_target"]:ckecked'
+    ).value;
+    
+    let str = moment(date_input).format(date_format);
+    
+    document.querySelector(
+        '#frame1 .stamp_text[' + date_target + ']'
+    ).value = str;
+});
 
 </script>
 	
