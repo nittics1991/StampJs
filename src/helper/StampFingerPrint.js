@@ -13,11 +13,6 @@ let StampFingerPrint =  {
     */
     stamp:function(selector, x, y, color) {
         let text = StampFingerPrint._generateStampText();
-        
-        
-        console.log(text)
-        
-        
         StampFingerPrint._save(text);
         StampFingerPrint.render(selector, x, y, color, text);
    },
@@ -35,10 +30,10 @@ let StampFingerPrint =  {
         let ctx = canvas.getContext('2d');
         ctx.textAlign = 'left';
         ctx.textBaseline = 'top';        
-        ctx.font = '6px "serif"';
+        ctx.font = '8px "serif"';
         ctx.fillStyle = color != null? color:'#ffffff';
         
-        let canvas_width = canvas.length;
+        let canvas_width = canvas.width;
         let write_text = StampFingerPrint._toAdjustText(
             ctx,
             canvas_width,
@@ -57,12 +52,13 @@ let StampFingerPrint =  {
     */
     _toAdjustText:function(ctx, canvas_width, text) {
         if (canvas_width < 6) throw newError('invalid canvas width');
+        if (text.length < 8) throw newError('invalid text length');
         
-        let text_width = ctx.measureText(text);
-        if (text_width <= 6) throw newError('invalid text width');
-        if (text_width.length < 8) throw newError('invalid text length');
+        let text_metrics = ctx.measureText(text);
         
-        if (text_width > canvas_width) {
+        if (text_metrics.width <= 6) throw newError('invalid text width');
+        
+        if (text_metrics.width > (canvas_width * 0.9)) {
             return StampFingerPrint._toAdjustText(
                 ctx,
                 canvas_width,
