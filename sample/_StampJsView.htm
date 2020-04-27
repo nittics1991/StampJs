@@ -47,7 +47,7 @@ footer {
     z-index:10;
     position:absolute;
     left:40%;
-    top:30%;
+    top:20%;
     background-color:#ffffff;
 }
 
@@ -366,7 +366,7 @@ input:invalid {
 <div id="date_dialog" class="stamp_dialog" draggable="true">
     <div>日付入力</div>
     <div><label>日付<input type="date" name="date_input" required></label></div>
-    <div><label>書式<input type="text" name="date_format" required title="@see Momentjs"></label></div>
+    <div><label>書式<input type="text" name="date_format" value="YYYY-MM-DD" required title="@see Momentjs"></label></div>
     <div>
         <label><input type="radio" name="date_target[]" value="1"></inpit>1番</label>
         <label><input type="radio" name="date_target[]" value="2" checked></inpit>2番</label>
@@ -442,7 +442,7 @@ var inidata = {
 			margin_size:0,
 		},
 		{
-			stamp_text:'2020/12/31',
+			stamp_text:moment().format('YYYY-MM-DD'),
 			font_family:'',
 			font_size:30,
 			text_align:'center',
@@ -472,6 +472,14 @@ var inidata = {
 window.addEventListener('load', function() {
     StampJsView.dataToFrom('#frame1', inidata);
     document.querySelector('#frame1 .refresh_setting').click();
+    
+    let date_format = document.querySelector(
+        '#date_dialog [name="date_format"]'
+    ).value;
+    
+    document.querySelector(
+        '#date_dialog [name="date_input"]'
+    ).value = moment().format(date_format);
 });
 
 //main button
@@ -672,7 +680,7 @@ document.querySelector('#main')
 document.querySelector('#file_dialog [name="file_name"]')
     .addEventListener('change', function(e) {
     
-    document.querySelector('.stamp_dialog')
+    document.querySelector('#file_dialog')
         .style.display = "none";
     
     let reader = new FileReader();
@@ -704,7 +712,7 @@ document.querySelector('#file_dialog [name="file_name"]')
 document.querySelector('#date_dialog .exec_button')
     .addEventListener('click', function(e) {
     
-    document.querySelector('.stamp_dialog')
+    document.querySelector('#date_dialog')
         .style.display = "none";
     
     let date_input = document.querySelector(
@@ -716,13 +724,13 @@ document.querySelector('#date_dialog .exec_button')
     ).value;
     
     let date_target = document.querySelector(
-        '#date_dialog [name="date_target"]:ckecked'
+        '#date_dialog [name="date_target[]"]:checked'
     ).value;
     
     let str = moment(date_input).format(date_format);
     
     document.querySelector(
-        '#frame1 .stamp_text[' + date_target + ']'
+        '#frame1 [name="stamp_text[' + date_target + ']"]'
     ).value = str;
 });
 
