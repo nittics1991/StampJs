@@ -139,12 +139,4 @@ let StampHelper =  {
             elm.style.display = 'table-cell';
         });
     },
-     
-    
-    
-    
-    
-    
-    
-    
 };
