@@ -519,8 +519,11 @@ document.querySelector('#frame1 .refresh_setting')
             break;
     }
 	stamp.render();
-    StampFingerPrint.stamp('#frame1', 1, 1, '#ffffff');
-    let imgUri = StampHelper.exchangeToImage('canvas');
+    
+    let fingerPrint = new StampFingerPrint('#frame1');
+    fingerPrint.stamp(1, 1, '#ffffff');
+    
+    let imgUri = StampHelper.exchangeToImage('#frame1 canvas');
 });
 
 document.querySelector('#frame1 .load_setting')
