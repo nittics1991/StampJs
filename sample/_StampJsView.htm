@@ -32,7 +32,7 @@ ul {
     list-style-type:none;
 }
 
-.stamp_buttons {
+.button_flex {
     display:flex;
     align-items:center;
 }
@@ -88,7 +88,7 @@ input:invalid {
 		<div class="stamp_image"></div>
 	</div>
 	<div class="setting_area">
-        <ul class="stamp_buttons">
+        <ul class="stamp_buttons button_flex">
             <li>
                 <select name="stamp_select">
                     <option value=""></option>
@@ -104,13 +104,18 @@ input:invalid {
                 </select>
             </li>
             
-            <li><button type="button" class="refresh_setting">更新</button></li>
-            <li><button type="button" class="load_setting">読込</button></li>
-            <li><button type="button" class="save_setting">保存</button></li>
-            <li><button type="button" class="remove_setting">削除</button></li>
-            <li><button type="button" class="upload_setting">アップロード</button></li>
-            <li><button type="button" class="download_setting">ダウンロード</button></li>
-            <li><button type="button" class="date_setting">日付選択</button></li>
+            <li><button type="button" name="refresh_button">更新</button></li>
+            <li><button type="button" name="load_button">読込</button></li>
+            <li><button type="button" name="save_button">保存</button></li>
+            <li><button type="button" name="remove_button">削除</button></li>
+            <li><button type="button" name="upload_button">アップロード</button></li>
+            <li><button type="button" name="download_button">ダウンロード</button></li>
+            <li><button type="button" name="date_button">日付選択</button></li>
+        </ul>
+        
+        <ul class="finger_buttons button_flex">
+            <li><button type="button" name="finget_setting_button">指紋設定</button></li>
+            <li><button type="button" name="finget_stamp_button">指紋捺印</button></li>
         </ul>
         
 		<table class="setting_full">
@@ -360,7 +365,7 @@ input:invalid {
     <div>ファイル選択</div>
     <input type="file" name="file_name">
     <input type="hidden" name="id">
-    <div><button type="button" class="close_button">閉じる</button></div>
+    <div><button type="button" name="close_button">閉じる</button></div>
 </div>
 
 <div id="date_dialog" class="stamp_dialog" draggable="true">
@@ -375,8 +380,8 @@ input:invalid {
     </div>
     <input type="hidden" name="id">
     <div>
-        <button type="button" class="exec_button">設定</button>
-        <button type="button" class="close_button">閉じる</button>
+        <button type="button" name="exec_button">設定</button>
+        <button type="button" name="close_button">閉じる</button>
     </div>
 </div>
 
@@ -472,7 +477,7 @@ var inidata = {
 //load
 window.addEventListener('load', function() {
     StampJsView.dataToFrom('#frame1', inidata);
-    document.querySelector('#frame1 .refresh_setting').click();
+    document.querySelector('#frame1 button[name="refresh_button"]').click();
     
     let date_format = document.querySelector(
         '#date_dialog [name="date_format"]'
@@ -484,7 +489,7 @@ window.addEventListener('load', function() {
 });
 
 //main button
-document.querySelector('#frame1 .refresh_setting')
+document.querySelector('#frame1 button[name="refresh_button"]')
     .addEventListener('click', function(e) {
 	
     StampJsView.clearImage('#frame1');
@@ -526,7 +531,7 @@ document.querySelector('#frame1 .refresh_setting')
     let imgUri = StampHelper.exchangeToImage('#frame1 canvas');
 });
 
-document.querySelector('#frame1 .load_setting')
+document.querySelector('#frame1 button[name="load_button"]')
     .addEventListener('click', function(e) {
     
     let select = document.querySelector(
@@ -540,10 +545,10 @@ document.querySelector('#frame1 .load_setting')
     
     data = JSON.parse(json);
     StampJsView.dataToFrom('#frame1', data);
-    document.querySelector('#frame1 .refresh_setting').click();
+    document.querySelector('#frame1 button[name="refresh_button"]').click();
 });
 
-document.querySelector('#frame1 .save_setting')
+document.querySelector('#frame1 button[name="save_button"]')
     .addEventListener('click', function(e) {
     
     if (!window.confirm('May I save ?')) return;
@@ -551,7 +556,7 @@ document.querySelector('#frame1 .save_setting')
     StampJsView.save('frame1', data);
 });
 
-document.querySelector('#frame1 .remove_setting')
+document.querySelector('#frame1 button[name="remove_button"]')
     .addEventListener('click', function(e) {
     
     if (!window.confirm('May I remove ?')) return;
@@ -559,7 +564,7 @@ document.querySelector('#frame1 .remove_setting')
     StampJsView.remove('frame1', data);
 });
 
-document.querySelector('#frame1 .upload_setting')
+document.querySelector('#frame1 button[name="upload_button"]')
     .addEventListener('click', function(e) {
     
     document.querySelector('#file_dialog input[name="id"]')
@@ -569,13 +574,13 @@ document.querySelector('#frame1 .upload_setting')
         .style.display = "block";
 });
 
-document.querySelector('#frame1 .download_setting')
+document.querySelector('#frame1 button[name="download_button')
     .addEventListener('click', function(e) {
     
     StampJsView.download('frame1', '#frame1');
 });
 
-document.querySelector('#frame1 .date_setting')
+document.querySelector('#frame1 button[name="date_button"]')
     .addEventListener('click', function(e) {
     
     document.querySelector('#date_dialog')
@@ -634,7 +639,7 @@ document.querySelector('#frame1 [name="stamp_select"]')
 
 //dialog
 Array.prototype.forEach.call(
-    document.querySelectorAll('.close_button'),
+    document.querySelectorAll('button[name="close_button"]'),
     function(elm) {
         elm.addEventListener('click', function(e) {
             e.target.parentNode.parentNode.style.display = "none";
@@ -714,7 +719,7 @@ document.querySelector('#file_dialog [name="file_name"]')
 });
 
 //date dialog
-document.querySelector('#date_dialog .exec_button')
+document.querySelector('#date_dialog button[name="exec_button"]')
     .addEventListener('click', function(e) {
     
     document.querySelector('#date_dialog')
@@ -738,6 +743,14 @@ document.querySelector('#date_dialog .exec_button')
         '#frame1 [name="stamp_text[' + date_target + ']"]'
     ).value = str;
 });
+
+//finger button
+//document.querySelector('#frame1 .finget_setting_button')
+    //.addEventListener('click', function(e) {
+    
+    
+//});
+
 
 </script>
 	
