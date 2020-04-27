@@ -2,14 +2,18 @@
 *   フィンガープリント
 *
 *   @param string selector
+*   @param string id
 */
-let StampFingerPrint = function(selector) {
+let StampFingerPrint = function(selector, id) {
     this._selector = selector;
+    this._id = id;
+    
     this.font_size = 10;
     this.min_canvas_width = 20;
     this.min_text_length = 8;
     this.min_text_metrics_width = 8;
     this.cyepto_length = 16;
+    this.storage_expire_minite = 60 * 1;
 };
 
 /**
@@ -98,14 +102,38 @@ StampFingerPrint.prototype._generateStampText = function() {
 /**
 *   保存
 *
-*   @return string
+*   @param string text
 */
-StampFingerPrint.prototype._save = function() {
-
-
-
-
-
-
-
+StampFingerPrint.prototype._save = function(text) {
+    let saved_data = window.localStorage.getItem(
+        'StampFingerPrint_' + this._id
+    );
+    
+    let new_data = [];
+    
+    if (!saved_data) {
+        new_data.push(text);
+    } else {
+        let parsed_data = JSON.parse(saved_data);
+        
+        let _this = this;
+        new_data = parsed_data.filter(function(val) {
+            let splited = val.split('_');
+            if (splited[0] == null) throw new Error('invalid date');
+            
+            let utc_time = (new Date(splited[0])).getTime();
+            
+            let limit_time = (new Date()).getTime()
+                - _this.storage_expire_minite * 1000;
+            
+            return utc_time > limit_time;
+        });
+        
+        new_data.push(text);
+    }
+    
+    window.localStorage.setItem(
+        'StampFingerPrint_' + this._id,
+        JSON.stringify(new_data)
+    );
 };

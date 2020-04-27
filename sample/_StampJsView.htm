@@ -520,7 +520,7 @@ document.querySelector('#frame1 .refresh_setting')
     }
 	stamp.render();
     
-    let fingerPrint = new StampFingerPrint('#frame1');
+    let fingerPrint = new StampFingerPrint('#frame1', 'frame1');
     fingerPrint.stamp(1, 1, '#ffffff');
     
     let imgUri = StampHelper.exchangeToImage('#frame1 canvas');
