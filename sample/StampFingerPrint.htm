@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8"> 
+
+<title>StmpFingerPrint</title>
+
+<style>
+
+#main {
+    position:relative;
+}
+
+table {
+	border-collapse:collapse;
+}
+
+th,td {
+	border: 1px ridge #cfcfcf;
+}
+
+ul {
+    padding:0;
+    list-style-type:none;
+}
+
+input[type="number"] {
+    height:1rem;
+}
+
+.button_flex {
+    display:flex;
+    align-items:center;
+}
+
+footer {
+    height:40px;
+}
+
+</style>
+
+</head>
+<body>
+
+<div id="main">
+<div id="frame1" class="frame">
+	<h4>スタンプ StampFingerPrint</h4>
+	<div class="setting_area">
+		<table class="setting_data">
+			<thead>
+				<tr>
+					<th>種別</th>
+					<th>座標X</th>
+					<th>座標X</th>
+					<th>色</th>
+				</tr>
+			</thead>
+			<tbody>
+                <tr>
+                    <td><input type="text" name="stamp_select" readonly></td>
+                    <td><input type="number" name="stamp_x" value="0"></td>
+                    <td><input type="number" name="stamp_y" value="0"></td>
+                    <td><input type="color" name="stamp_color" value="#ffffff"></td>
+                    
+                    
+                    
+                    button追加
+                    
+                    
+                    
+				</tr>
+			</tbody>
+        </table>
+    </div>
+    
+	<div class="data_area">
+		<table class="finger_data">
+			<thead>
+				<tr>
+					<th>履歴</th>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+        </table>
+    </div>
+</div>
+
+</div>
+
+<footer></footer>
+
+<script>
+
+//load
+window.addEventListener('load', function() {
+    
+    let StampFinger = new StampFinger
+    
+    
+    
+    let url = new URL(window.location.href)
+    let urlSearchParams = new URLSearchParams(url.search);
+    
+    document.querySelector('#frame1 [name="stamp_select"])
+        .value = urlSearchParams.has('stamp_select')?
+        urlSearchParams.get('stamp_select'):'';
+    
+    
+    
+    
+    
+    
+    
+};
+
+</script>
+	
+</body>
+</html>
