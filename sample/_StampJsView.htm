@@ -422,6 +422,7 @@ input:invalid {
 
 <script src="../src/helper/StampCanvasExchanger.js"></script>
 <script src="../src/helper/StampFileDownloader.js"></script>
+<script src="../src/helper/StampRepository.js"></script>
 <script src="../src/helper/StampTableHelper.js"></script>
 
 <script src="../src/helper/StampJsView.js"></script>
@@ -554,11 +555,10 @@ document.querySelector('#frame1 button[name="load_button"]')
     );
     
     if (!window.confirm('May I load ?')) return;
-    let json = StampJsView.load('frame1', select.value);
+    let data = StampJsView.load('frame1', select.value);
     
-    if (json == null) return;
+    if (data == null) return;
     
-    data = JSON.parse(json);
     StampJsView.dataToFrom('#frame1', data);
     document.querySelector('#frame1 button[name="refresh_button"]').click();
 });

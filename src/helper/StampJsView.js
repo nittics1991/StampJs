@@ -269,9 +269,11 @@ let StampJsView =  {
     *   @param string content
     */
     save:function(id, dataset) {
-        window.localStorage.setItem(
+        let repository = new StampRepository('StampJsView');
+        
+        repository.save(
             id + '_' + dataset.stamp_select,
-            JSON.stringify(dataset)
+            dataset
         );
     },
     
@@ -282,7 +284,9 @@ let StampJsView =  {
     *   @param string content
     */
     remove:function(id, dataset) {
-        window.localStorage.removeItem(
+        let repository = new StampRepository('StampJsView');
+        
+        repository.remove(
             id + '_' + dataset.stamp_select
         );
     },
@@ -295,7 +299,9 @@ let StampJsView =  {
     *   @return object
     */
     load:function(id, stamp_select) {
-        return window.localStorage.getItem(
+        let repository = new StampRepository('StampJsView');
+        
+        return repository.load(
             id + '_' + stamp_select
         );
     },
