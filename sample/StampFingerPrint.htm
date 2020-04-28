@@ -28,6 +28,10 @@ input[type="number"] {
     height:1rem;
 }
 
+.readonly {
+    background-color:#80B0F0;
+}
+
 .button_flex {
     display:flex;
     align-items:center;
@@ -49,6 +53,7 @@ footer {
 		<table class="setting_data">
 			<thead>
 				<tr>
+					<th>有効日数</th>
 					<th>種別</th>
 					<th>座標X</th>
 					<th>座標X</th>
@@ -57,20 +62,22 @@ footer {
 			</thead>
 			<tbody>
                 <tr>
-                    <td><input type="text" name="stamp_select" readonly></td>
+                    <td>
+                        <input type="hidden" name="stamp_select">
+                        <input type="number" name="stamp_expire" value="365">
+                    </td>
+                    <td><input type="text" class="readonly" name="stamp_name" readonly></td>
                     <td><input type="number" name="stamp_x" value="0"></td>
                     <td><input type="number" name="stamp_y" value="0"></td>
                     <td><input type="color" name="stamp_color" value="#ffffff"></td>
-                    
-                    
-                    
-                    button追加
-                    
-                    
-                    
 				</tr>
 			</tbody>
         </table>
+        
+        <ul class="finger_buttons button_flex">
+            <li><button type="button" name="save_button">保存</button></li>
+            <li><button type="button" name="remove_button">削除</button></li>
+        </ul>
     </div>
     
 	<div class="data_area">
@@ -94,17 +101,23 @@ footer {
 
 //load
 window.addEventListener('load', function() {
-    
-    let StampFinger = new StampFinger
-    
-    
-    
     let url = new URL(window.location.href)
     let urlSearchParams = new URLSearchParams(url.search);
     
-    document.querySelector('#frame1 [name="stamp_select"])
-        .value = urlSearchParams.has('stamp_select')?
-        urlSearchParams.get('stamp_select'):'';
+    if (!urlSearchParams.has('stamp_select'))
+        throw new Error('not define stamp select');
+    
+    if (!urlSearchParams.has('stamp_name'))
+        throw new Error('not define stamp stamp_name');
+    
+    document.querySelector('#frame1 [name="stamp_select"]').value = 
+        urlSearchParams.get('stamp_select');
+    
+    document.querySelector('#frame1 [name="stamp_name"]').value = 
+        urlSearchParams.get('stamp_name');
+    
+    
+    let StampFinger = new StampFingerPrint
     
     
     
@@ -112,7 +125,9 @@ window.addEventListener('load', function() {
     
     
     
-};
+    
+    
+});
 
 </script>
 	

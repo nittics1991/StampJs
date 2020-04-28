@@ -762,9 +762,13 @@ document.querySelector('#frame1 button[name="finget_setting_button"]')
     
     let stamp_select = document.querySelector(
         '#frame1 [name="stamp_select"]'
-    ).value;
+    );
     
-    window.open('StampFingerPrint.htm?stamp_select=' + stamp_select);
+    window.open(
+        'StampFingerPrint.htm?stamp_select=' + stamp_select.value
+            + '&stamp_name='
+            + stamp_select.options[stamp_select.selectedIndex].text
+    );
 });
 
 </script>
