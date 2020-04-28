@@ -318,7 +318,7 @@ let StampJsView =  {
         }).filter(function(data) {
             return data != null;
         });
-        StampHelper.downloadFile(JSON.stringify(dataset), 'setting.json')
+        StampFileDownloader.download(JSON.stringify(dataset), 'setting.json')
     },
     
     /**
@@ -330,11 +330,11 @@ let StampJsView =  {
     disableTo:function(selector, columnNos) {
         for (let i = 1; i <= 4; i++) {
             if (columnNos.includes(i)) {
-                StampHelper.disableTableColumn(selector + ' .setting_parts', i+1);
+                StampTableHelper.disableTableColumn(selector + ' .setting_parts', i+1);
                 StampJsView.clearFormFor(selector, i);
                 
             } else {
-                StampHelper.enableTableColumn(selector + ' .setting_parts', i+1);
+                StampTableHelper.enableTableColumn(selector + ' .setting_parts', i+1);
             }
         }
     },

@@ -390,39 +390,42 @@ input:invalid {
 
 <footer></footer>
 
-<script src="../lib/momentjs.js"></script> 
+<script src="../lib/momentjs.js"></script>
 
-<script src="../src/StampFactory.js"></script> 
-<script src="../src/StampBuilder.js"></script> 
+<script src="../src/StampFactory.js"></script>
+<script src="../src/StampBuilder.js"></script>
 
-<script src="../src/StampFrame.js"></script> 
+<script src="../src/StampFrame.js"></script>
 <script src="../src/StampData.js"></script>
 
-<script src="../src/HorizonText.js"></script> 
-<script src="../src/VerticalText.js"></script> 
+<script src="../src/HorizonText.js"></script>
+<script src="../src/VerticalText.js"></script>
 
-<script src="../src/CircleHorizonBorder.js"></script> 
-<script src="../src/CircleVerticalBorder.js"></script> 
+<script src="../src/CircleHorizonBorder.js"></script>
+<script src="../src/CircleVerticalBorder.js"></script>
 
-<script src="../src/RectHorizonBorder.js"></script> 
-<script src="../src/RectVerticalBorder.js"></script> 
+<script src="../src/RectHorizonBorder.js"></script>
+<script src="../src/RectVerticalBorder.js"></script>
 
-<script src="../src/HorizonPlacement.js"></script> 
-<script src="../src/VerticalPlacement.js"></script> 
+<script src="../src/HorizonPlacement.js"></script>
+<script src="../src/VerticalPlacement.js"></script>
 
-<script src="../src/OptionPosition.js"></script> 
+<script src="../src/OptionPosition.js"></script>
 
-<script src="../src/RectStamp.js"></script> 
-<script src="../src/CircleStamp.js"></script> 
+<script src="../src/RectStamp.js"></script>
+<script src="../src/CircleStamp.js"></script>
 
-<script src="../src/Shapes.js"></script> 
-<script src="../src/StampJs.js"></script> 
+<script src="../src/Shapes.js"></script>
+<script src="../src/StampJs.js"></script>
  
-<script src="../src/CanvasRender.js"></script> 
+<script src="../src/CanvasRender.js"></script>
 
-<script src="../src/helper/StampHelper.js"></script> 
-<script src="../src/helper/StampJsView.js"></script> 
-<script src="../src/helper/StampFingerPrint.js"></script> 
+<script src="../src/helper/StampCanvasExchanger.js"></script>
+<script src="../src/helper/StampFileDownloader.js"></script>
+<script src="../src/helper/StampTableHelper.js"></script>
+
+<script src="../src/helper/StampJsView.js"></script>
+<script src="../src/helper/StampFingerPrint.js"></script>
 
 <script>
 
@@ -540,7 +543,7 @@ document.querySelector('#frame1 button[name="refresh_button"]')
         fingerPrint.stamp(1, 1, '#ffffff');
     }
     
-    let imgUri = StampHelper.exchangeToImage('#frame1 canvas');
+    let imgUri = StampCanvasExchanger.exchangeToImage('#frame1 canvas');
 });
 
 document.querySelector('#frame1 button[name="load_button"]')
