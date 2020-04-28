@@ -382,7 +382,7 @@ let StampJsView =  {
     },
     
     /**
-    *   hiddenInStandard
+    *   visibleInStandard
     *
     *   @param string selector
     *   @param string stamp_select

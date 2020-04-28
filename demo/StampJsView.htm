@@ -534,11 +534,11 @@ document.querySelector('#frame1 button[name="refresh_button"]')
         '#frame1 [name="finger_stamp[]"]:checked'
         ).value == 'true'
      ) {
-        let stamp_select = document.querySelector(
-            '#frame1 .stamp_select'
-        ).value;
         
-        //設定を読み込んでスタンプ 
+        //設定を読み込んで指紋スタンプ 
+        //stampFingerPrint.load()
+        
+        
         
         let fingerPrint = new StampFingerPrint('#frame1', 'frame1');
         fingerPrint.stamp(1, 1, '#ffffff');
@@ -675,19 +675,19 @@ Array.prototype.forEach.call(
     }
 );
 
-document.querySelector('#main')
+document.querySelector('body')
     .addEventListener('dragover', function(e) {
     
     e.preventDefault();
 });
 
-document.querySelector('#main')
+document.querySelector('body')
     .addEventListener('dragenter', function(e) {
     
     e.preventDefault();
 });
 
-document.querySelector('#main')
+document.querySelector('body')
     .addEventListener('drop', function(e) {
     
     e.preventDefault();
@@ -713,7 +713,7 @@ document.querySelector('#file_dialog [name="file_name"]')
     reader.readAsText(files[0]);
     
     reader.addEventListener('load', function(e) {
-        let dataset = JSON.parse(reader.result);
+        let dataset = JSON.parse(e.result);
         
         if (dataset == null ||
             dataset == [] ||
