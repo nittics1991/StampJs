@@ -103,7 +103,13 @@ let StampFingerPrintView = {
         );
     },
     
-    
-    
-    
+    /**
+    *   download
+    *
+    *   @param string selector
+    */
+    download:function(selector) {
+        let dataset = StampFingerPrintView.formToData(selector);
+        StampFileDownloader.download(JSON.stringify(dataset), 'setting.json')
+    },
 };
