@@ -427,6 +427,7 @@ input:invalid {
 
 <script src="../src/demo/StampJsView.js"></script>
 <script src="../src/demo/StampFingerPrint.js"></script>
+<script src="../src/demo/StampFingerPrintView.js"></script>
 
 <script src="../src/demo/parts/StampMoveable.js"></script>
 <script src="../src/demo/parts/StampDialog.js"></script>
@@ -540,13 +541,13 @@ document.querySelector('#frame1 button[name="refresh_button"]')
         ).value == 'true'
      ) {
         
-        //設定を読み込んで指紋スタンプ 
-        //stampFingerPrint.load()
-        
-        
-        
+        let config = StampFingerPrintView.load('frame1', data.stamp_select);
         let fingerPrint = new StampFingerPrint('#frame1', 'frame1');
-        fingerPrint.stamp(1, 1, '#ffffff');
+        fingerPrint.stamp(
+            config.stamp_x,
+            config.stamp_y,
+            config.stamp_color
+        );
     }
     
     let imgUri = StampCanvasExchanger.exchangeToImage('#frame1 canvas');

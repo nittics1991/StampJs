@@ -49,6 +49,7 @@ StampFingerPrint.prototype._render = function(x, y, color, text) {
     let write_text = this._toAdjustText(
         ctx,
         canvas_width,
+        x,
         text
     );
     ctx.fillText(write_text, x, y);
@@ -59,11 +60,19 @@ StampFingerPrint.prototype._render = function(x, y, color, text) {
 *
 *   @param object ctx
 *   @param int canvas_width
+*   @param int x
 *   @param string text
 *   @return string
 */
-StampFingerPrint.prototype._toAdjustText = function(ctx, canvas_width, text) {
-    if (canvas_width < this.min_canvas_width)
+StampFingerPrint.prototype._toAdjustText = function(
+    ctx,
+    canvas_width,
+    x,
+    text
+) {
+    let width = canvas_width - x;
+    
+    if (width < this.min_canvas_width)
         throw newError('invalid canvas width');
     if (text.length < this.min_text_length)
         throw newError('invalid text length');
@@ -73,10 +82,11 @@ StampFingerPrint.prototype._toAdjustText = function(ctx, canvas_width, text) {
     if (text_metrics.width <= this.min_text_metrics_width)
         throw newError('invalid text width');
 
-    if (text_metrics.width > canvas_width) {
+    if (text_metrics.width > width) {
         return this._toAdjustText(
             ctx,
             canvas_width,
+            x,
             text.slice(1)
         );
     }

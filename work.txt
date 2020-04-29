@@ -1,5 +1,0 @@
-
-履歴機能
-
-queryパラメータで起動時にlocalStorage読み込み
-
