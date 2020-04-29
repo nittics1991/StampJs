@@ -3,8 +3,9 @@
 *
 *   @param string selector
 *   @param string id
+*   @param int expire_date
 */
-let StampFingerPrint = function(selector, id) {
+let StampFingerPrint = function(selector, id, expire_date) {
     this._selector = selector;
     this._id = id;
     
@@ -12,8 +13,8 @@ let StampFingerPrint = function(selector, id) {
     this.min_canvas_width = 20;
     this.min_text_length = 8;
     this.min_text_metrics_width = 8;
-    this.cyepto_length = 16;
-    this.storage_expire_minite = 60 * 1;
+    this.cryepto_radix = 16;
+    this.storage_expire_date = expire_date;
 };
 
 /**
@@ -101,11 +102,13 @@ StampFingerPrint.prototype._toAdjustText = function(
 StampFingerPrint.prototype._generateStampText = function() {
     let ar = new Uint8Array(8);
     crypto.getRandomValues(ar);
-
-    let result = '';
-    ar.forEach(function(num) {
-        result += num.toString(this.cyepto_length);
-    });
+    
+    let cryepto_radix = this.cryepto_radix
+    
+    '';
+    let result = ar.reduce(function(prev, num) {
+        return prev + ('00' + num.toString(cryepto_radix)).slice(-2);
+    }, '');
     return (new Date()).toISOString() + '_' + result;
 };
 
@@ -134,7 +137,7 @@ StampFingerPrint.prototype._save = function(text) {
             let utc_time = (new Date(splited[0])).getTime();
             
             let limit_time = (new Date()).getTime()
-                - _this.storage_expire_minite * 1000;
+                - _this.storage_expire_date * 1000 * 60 * 60 * 24;
             
             return utc_time > limit_time;
         });

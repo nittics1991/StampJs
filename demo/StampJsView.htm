@@ -542,7 +542,12 @@ document.querySelector('#frame1 button[name="refresh_button"]')
      ) {
         
         let config = StampFingerPrintView.load('frame1', data.stamp_select);
-        let fingerPrint = new StampFingerPrint('#frame1', 'frame1');
+        let fingerPrint = new StampFingerPrint(
+            '#frame1',
+            'frame1',
+            config.stamp_expire
+        );
+        
         fingerPrint.stamp(
             config.stamp_x,
             config.stamp_y,

@@ -134,6 +134,7 @@ footer {
 
 <script src="../src/demo/StampFingerPrint.js"></script>
 <script src="../src/demo/StampFingerPrintView.js"></script>
+<script src="../src/demo/StampFingerPrintHistory.js"></script>
 
 <script src="../src/demo/parts/StampMoveable.js"></script>
 <script src="../src/demo/parts/StampDialog.js"></script>
@@ -145,9 +146,10 @@ footer {
 window.addEventListener('load', function() {
     StampFingerPrintView.queryToForm('#frame1');
     
-    //履歴表示
-    
-    
+    StampFingerPrintHistory.render(
+        'frame1',
+        '#frame1 .finger_data tbody'
+    );
     
     let stamp_select = document.querySelector(
         '#frame1 [name="stamp_select"]'
