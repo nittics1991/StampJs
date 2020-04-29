@@ -10,7 +10,7 @@
         reader.readAsText(files[0]);
         
         reader.addEventListener('load', function(e) {
-            let dataset = JSON.parse(e.result);
+            let dataset = JSON.parse(e.target.result);
             
             if (dataset == null ||
                 dataset == [] ||
