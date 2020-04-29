@@ -361,8 +361,8 @@ input:invalid {
 		</table>
 	</div>
 </div>
-
-<div id="file_dialog" class="stamp_dialog moveable" draggable="true">
+          
+<div id="file_dialog" class="stamp_dialog" draggable="true">
     <div>ファイル選択</div>
     <input type="file" name="file_name">
     <input type="hidden" name="id">
@@ -420,15 +420,13 @@ input:invalid {
  
 <script src="../src/CanvasRender.js"></script>
 
-<script src="../src/demo/StampCanvasExchanger.js"></script>
-<script src="../src/demo/StampFileDownloader.js"></script>
-<script src="../src/demo/StampRepository.js"></script>
-<script src="../src/demo/StampTableHelper.js"></script>
+<script src="../src/helper/StampCanvasExchanger.js"></script>
+<script src="../src/helper/StampFileDownloader.js"></script>
+<script src="../src/helper/StampRepository.js"></script>
+<script src="../src/helper/StampTableHelper.js"></script>
 
-<script src="../src/demo/StampJsView.js"></script>
-<script src="../src/demo/StampFingerPrint.js"></script>
-
-<script src="../src/demo/parts/StampMoveable.js"></script>
+<script src="../src/helper/StampJsView.js"></script>
+<script src="../src/helper/StampFingerPrint.js"></script>
 
 <script>
 
@@ -656,13 +654,52 @@ document.querySelector('#frame1 [name="stamp_select"]')
 
 //dialog
 Array.prototype.forEach.call(
-    document.querySelectorAll('.stamp_dialog button[name="close_button"]'),
+    document.querySelectorAll('button[name="close_button"]'),
     function(elm) {
         elm.addEventListener('click', function(e) {
             e.target.parentNode.parentNode.style.display = "none";
         });
     }
 );
+
+Array.prototype.forEach.call(
+    document.querySelectorAll('.stamp_dialog'),
+    function(elm) {
+        elm.addEventListener('dragstart', function(e) {
+            e.dataTransfer.setData(
+                "text/plain",
+                '#' + elm.id
+            );
+            e.stopPropagation();
+        });
+    }
+);
+
+document.querySelector('body')
+    .addEventListener('dragover', function(e) {
+    
+    e.preventDefault();
+});
+
+document.querySelector('body')
+    .addEventListener('dragenter', function(e) {
+    
+    e.preventDefault();
+});
+
+document.querySelector('body')
+    .addEventListener('drop', function(e) {
+    
+    e.preventDefault();
+    e.stopPropagation();
+    
+    let target = document.querySelector(
+        e.dataTransfer.getData('text/plain')
+    );
+    
+    target.style.top = e.clientY + 'px';
+    target.style.left = e.clientX + 'px';
+});
 
 //file dialog
 document.querySelector('#file_dialog [name="file_name"]')
