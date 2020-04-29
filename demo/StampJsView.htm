@@ -429,6 +429,9 @@ input:invalid {
 <script src="../src/demo/StampFingerPrint.js"></script>
 
 <script src="../src/demo/parts/StampMoveable.js"></script>
+<script src="../src/demo/parts/StampDialog.js"></script>
+<script src="../src/demo/parts/StampFileDialog.js"></script>
+<script src="../src/demo/parts/StampDateDialog.js"></script>
 
 <script>
 
@@ -652,74 +655,6 @@ document.querySelector('#frame1 [name="stamp_select"]')
             StampJsView.visibleInStandard('#frame1', e.target.value);
             break;
     }
-});
-
-//dialog
-Array.prototype.forEach.call(
-    document.querySelectorAll('.stamp_dialog button[name="close_button"]'),
-    function(elm) {
-        elm.addEventListener('click', function(e) {
-            e.target.parentNode.parentNode.style.display = "none";
-        });
-    }
-);
-
-//file dialog
-document.querySelector('#file_dialog [name="file_name"]')
-    .addEventListener('change', function(e) {
-    
-    document.querySelector('#file_dialog')
-        .style.display = "none";
-    
-    let reader = new FileReader();
-    let files = e.target.files;
-    reader.readAsText(files[0]);
-    
-    reader.addEventListener('load', function(e) {
-        let dataset = JSON.parse(e.result);
-        
-        if (dataset == null ||
-            dataset == [] ||
-            !Array.isArray(dataset)
-        ) return;
-        
-        let selector = document.querySelector(
-            '#file_dialog [name="id"]'
-        ).value;
-        
-        dataset.forEach(function(json) {
-            let data = JSON.parse(json)
-            StampJsView.save('frame1', data);
-        });
-        
-        StampJsView.clearForm('#frame1');
-    });
-});
-
-//date dialog
-document.querySelector('#date_dialog button[name="exec_button"]')
-    .addEventListener('click', function(e) {
-    
-    document.querySelector('#date_dialog')
-        .style.display = "none";
-    
-    let date_input = document.querySelector(
-        '#date_dialog [name="date_input"]'
-    ).value;
-    
-    let date_format = document.querySelector(
-        '#date_dialog [name="date_format"]'
-    ).value;
-    
-    let date_target = document.querySelector(
-        '#date_dialog [name="date_target[]"]:checked'
-    ).value;
-    
-    let str = moment(date_input).format(date_format);
-    
-    document.querySelector(
-        '#frame1 [name="stamp_text[' + date_target + ']"]'
-    ).value = str;
 });
 
 //finger button

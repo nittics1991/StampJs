@@ -41,6 +41,29 @@ footer {
     height:40px;
 }
 
+.stamp_dialog {
+    border:2px ridge #000000;
+    display:none;
+    z-index:10;
+    position:absolute;
+    left:40%;
+    top:20%;
+    background-color:#ffffff;
+}
+
+.stamp_dialog > div:first-child {
+    background-color:#c0c0c0;
+}
+
+.stamp_dialog > div:last-child {
+    display:flex;
+    justify-content:center
+}
+
+#file_dialog {
+    width:300px;
+}
+
 </style>
 
 </head>
@@ -95,9 +118,21 @@ footer {
     </div>
 </div>
 
+<div id="file_dialog" class="stamp_dialog moveable" draggable="true">
+    <div>ファイル選択</div>
+    <input type="file" name="file_name">
+    <input type="hidden" name="id">
+    <div><button type="button" name="close_button">閉じる</button></div>
+</div>
+
 </div>
 
 <footer></footer>
+
+
+<script src="../src/demo/parts/StampMoveable.js"></script>
+<script src="../src/demo/parts/StampDialog.js"></script>
+<script src="../src/demo/parts/StampFileDialog.js"></script>
 
 <script>
 
@@ -119,7 +154,7 @@ window.addEventListener('load', function() {
         urlSearchParams.get('stamp_name');
     
     
-    let StampFinger = new StampFingerPrint
+    //let StampFinger = new StampFingerPrint
     
     
     
@@ -129,6 +164,20 @@ window.addEventListener('load', function() {
     
     
     
+});
+
+
+
+
+
+document.querySelector('#frame1 button[name="upload_button"]')
+    .addEventListener('click', function(e) {
+    
+    document.querySelector('#file_dialog input[name="id"]')
+        .value = '#frame1';
+    
+    document.querySelector('#file_dialog')
+        .style.display = "block";
 });
 
 </script>
