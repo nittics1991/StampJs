@@ -52,8 +52,10 @@ let StampFingerPrintView = {
     *   @param object dataset
     */
     dataToFrom:function(selector, dataset) {
-        Object.keys(dataset, function(key) {
-            document.querySelector(key).value = dataset[key];
+        Object.keys(dataset).forEach(function(name) {
+            document.querySelector(
+                selector + ' [name="' + name + '"]'
+            ).value = dataset[name];
         });
     },
     

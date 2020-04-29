@@ -152,7 +152,7 @@ window.addEventListener('load', function() {
     let stamp_select = document.querySelector(
         '#frame1 [name="stamp_select"]'
     );
-    let data = StampFingerPrintView.load('#frame1', stamp_select.value);
+    let data = StampFingerPrintView.load('frame1', stamp_select.value);
     
     if (data == null) return;
     StampFingerPrintView.dataToFrom('#frame1', data);
