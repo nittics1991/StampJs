@@ -51,11 +51,13 @@ footer {
     background-color:#ffffff;
 }
 
-.stamp_dialog > div:first-child {
+.stamp_dialog > h2 {
+    margin:0;
     background-color:#c0c0c0;
+    font-size:1rem;
 }
 
-.stamp_dialog > div:last-child {
+.stamp_dialog > nav {
     display:flex;
     justify-content:center
 }
@@ -82,12 +84,14 @@ input:invalid {
 <body>
 
 <main>
-<div id="frame1" class="frame">
-	<h4>スタンプ StampJs</h4>
-	<div class="stamp_area">
+<article id="frame1" class="frame">
+	<h1>スタンプ StampJs</h1>
+	
+    <figure class="stamp_area">
 		<div class="stamp_image"></div>
-	</div>
-	<div class="setting_area">
+	</figure>
+	
+    <nav class="setting_button">
         <ul class="stamp_buttons button_flex">
             <li>
                 <select name="stamp_select">
@@ -115,10 +119,12 @@ input:invalid {
         
         <ul class="finger_buttons button_flex">
             <li><button type="button" name="finget_setting_button">指紋設定/履歴</button></li>
-            <li><label><input type="radio" name="finger_stamp" value="false" checked></inpit>無</label></li>
-            <li><label><input type="radio" name="finger_stamp" value="true"></inpit>有</label></li>
+            <li><label><input type="radio" name="finger_stamp" value="false" checked>無</label></li>
+            <li><label><input type="radio" name="finger_stamp" value="true">有</label></li>
         </ul>
-        
+    </nav>
+	
+    <figure class="setting_area">
 		<table class="setting_full">
 			<thead>
 				<tr>
@@ -130,73 +136,73 @@ input:invalid {
                 <tr class="stamp_type">
 					<th>種別</th>
 					<td>
-						<label><input type="radio" name="stamp_type" value="circle"></inpit>丸印</label>
-						<label><input type="radio" name="stamp_type" value="rect"></inpit>角印</label>
+						<label><input type="radio" name="stamp_type" value="circle">丸印</label>
+						<label><input type="radio" name="stamp_type" value="rect">角印</label>
                     </td>
 				</tr>
 				
                 <tr class="stamp_width">
 					<th>全体幅</th>
 					<td>
-						<input type="number" name="stamp_width" value=""></inpit>
+						<input type="number" name="stamp_width" value="">
 					</td>
 				</tr>
 				
 				<tr class="stamp_height">
 					<th>全体高</th>
 					<td>
-						<input type="number" name="stamp_height" value=""></inpit>
+						<input type="number" name="stamp_height" value="">
 					</td>
 				</tr>
 				
 				<tr class="line_weight">
 					<th>線幅</th>
 					<td>
-						<input type="number" name="line_weight" value=""></inpit>
+						<input type="number" name="line_weight" value="">
 					</td>
 				</tr>
 				
 				<tr class="stamp_color">
 					<th>印影色</th>
 					<td>
-						<label><input type="radio" name="stamp_color" value="red"></inpit>赤</label>
-						<label><input type="radio" name="stamp_color" value="black"></inpit>黒</label>
+						<label><input type="radio" name="stamp_color" value="red">赤</label>
+						<label><input type="radio" name="stamp_color" value="black">黒</label>
 					</td>
 				</tr>
 				
 				<tr class="border_direction">
 					<th>仕切線</th>
 					<td>
-						<label><input type="radio" name="border_direction" value="N"></inpit>無</label>
-						<label><input type="radio" name="border_direction" value="H"></inpit>水平</label>
-						<label><input type="radio" name="border_direction" value="V"></inpit>垂直</label>
+						<label><input type="radio" name="border_direction" value="N">無</label>
+						<label><input type="radio" name="border_direction" value="H">水平</label>
+						<label><input type="radio" name="border_direction" value="V">垂直</label>
 					</td>
 				</tr>
 				
 				<tr class="text_direction">
 					<th>文字方向</th>
 					<td>
-						<label><input type="radio" name="text_direction" value="H"></inpit>水平</label>
-						<label><input type="radio" name="text_direction" value="V"></inpit>垂直</label>
+						<label><input type="radio" name="text_direction" value="H">水平</label>
+						<label><input type="radio" name="text_direction" value="V">垂直</label>
 					</td>
 				</tr>
 				
 				<tr class="text_placement">
 					<th>文字配置方向</th>
 					<td>
-						<label><input type="radio" name="text_placement" value="H"></inpit>水平</label>
-						<label><input type="radio" name="text_placement" value="V"></inpit>垂直</label>
+						<label><input type="radio" name="text_placement" value="H">水平</label>
+						<label><input type="radio" name="text_placement" value="V">垂直</label>
 					</td>
 				</tr>
                 
 				<tr class="option_position">
 					<th>追加情報</th>
 					<td>
-						<label><input type="radio" name="option_position" value="non"></inpit>無</label>
-						<label><input type="radio" name="option_position" value="left"></inpit>左</label>
-						<label><input type="radio" name="option_position" value="right"></inpit>右</label>
-						<label><input type="radio" name="option_position" value="top"></inpit>上</label>
-						<label><input type="radio" name="option_position" value="bottom"></inpit>下</label>
+						<label><input type="radio" name="option_position" value="non">無</label>
+						<label><input type="radio" name="option_position" value="left">左</label>
+						<label><input type="radio" name="option_position" value="right">右</label>
+						<label><input type="radio" name="option_position" value="top">上</label>
+						<label><input type="radio" name="option_position" value="bottom">下</label>
 					</td>
 				</tr>
 			</tbody>
@@ -224,16 +230,16 @@ input:invalid {
 				<tr class="stamp_text">
 					<th>表示文字</th>
 					<td>
-						<input type="text" name="stamp_text[1]"></inpit>
+						<input type="text" name="stamp_text[1]">
 					</td>
 					<td>
-						<input type="text" name="stamp_text[2]"></inpit>
+						<input type="text" name="stamp_text[2]">
 					</td>
 					<td>
-						<input type="text" name="stamp_text[3]"></inpit>
+						<input type="text" name="stamp_text[3]">
 					</td>
 					<td>
-						<input type="text" name="stamp_text[4]"></inpit>
+						<input type="text" name="stamp_text[4]">
 					</td>
 				</tr>
 				
@@ -256,16 +262,16 @@ input:invalid {
 				<tr class="font_size">
 					<th>サイズ</th>
 					<td>
-						<input type="number" name="font_size[1]" value=""></inpit>
+						<input type="number" name="font_size[1]" value="">
 					</td>
 					<td>
-						<input type="number" name="font_size[2]" value=""></inpit>
+						<input type="number" name="font_size[2]" value="">
 					</td>
 					<td>
-						<input type="number" name="font_size[3]" value=""></inpit>
+						<input type="number" name="font_size[3]" value="">
 					</td>
 					<td>
-						<input type="number" name="font_size[4]" value=""></inpit>
+						<input type="number" name="font_size[4]" value="">
 					</td>
 				</tr>
 				
@@ -344,47 +350,55 @@ input:invalid {
 				<tr class="margin_size">
 					<th>マージン</th>
 					<td>
-						<input type="number" name="margin_size[1]" value=""></inpit>
+						<input type="number" name="margin_size[1]" value="">
 					</td>
 					<td>
-						<input type="number" name="margin_size[2]" value=""></inpit>
+						<input type="number" name="margin_size[2]" value="">
 					</td>
 					<td>
-						<input type="number" name="margin_size[3]" value=""></inpit>
+						<input type="number" name="margin_size[3]" value="">
 					</td>
 					<td>
-						<input type="number" name="margin_size[4]" value=""></inpit>
+						<input type="number" name="margin_size[4]" value="">
 					</td>
 				</tr>
 				
 			</tbody>
 		</table>
-	</div>
-</div>
+	</figure>
+</article>
 
-<div id="file_dialog" class="stamp_dialog moveable" draggable="true">
-    <div>ファイル選択</div>
-    <input type="file" name="file_name">
-    <input type="hidden" name="id">
-    <div><button type="button" name="close_button">閉じる</button></div>
-</div>
+<aside id="file_dialog" class="stamp_dialog moveable" draggable="true">
+    <h2>ファイル選択</h2>
+    <ul>
+        <li><input type="file" name="file_name"></li>
+        <li><input type="hidden" name="id"></li>
+    </ul>
+    <nav>
+        <button type="button" name="close_button">閉じる</button>
+    </nav>
+</aside>
 
-<div id="date_dialog" class="stamp_dialog moveable" draggable="true">
-    <div>日付入力</div>
-    <div><label>日付<input type="date" name="date_input" required></label></div>
-    <div><label>書式<input type="text" name="date_format" value="YYYY-MM-DD" required title="@see Momentjs"></label></div>
-    <div>
-        <label><input type="radio" name="date_target" value="1"></inpit>1番</label>
-        <label><input type="radio" name="date_target" value="2" checked></inpit>2番</label>
-        <label><input type="radio" name="date_target" value="3"></inpit>3番</label>
-        <label><input type="radio" name="date_target" value="4"></inpit>4番</label>
-    </div>
-    <input type="hidden" name="id">
-    <div>
+<aside id="date_dialog" class="stamp_dialog moveable" draggable="true">
+    <h2>日付入力</h2>
+    <ul>
+        <li><label>日付<input type="date" name="date_input" required></label></li>
+        <li><label>書式<input type="text" name="date_format" value="YYYY-MM-DD" required title="@see Momentjs"></label></li>
+        <ul>
+            <li>
+                <label><input type="radio" name="date_target" value="1">1番</label>
+                <label><input type="radio" name="date_target" value="2" checked>2番</label>
+                <label><input type="radio" name="date_target" value="3">3番</label>
+                <label><input type="radio" name="date_target" value="4">4番</label>
+            </li>
+        </ul>
+        <li><input type="hidden" name="id"></li>
+    </ul>
+    <nav>
         <button type="button" name="exec_button">設定</button>
         <button type="button" name="close_button">閉じる</button>
-    </div>
-</div>
+    </nav>
+</aside>
 
 </main>
 
