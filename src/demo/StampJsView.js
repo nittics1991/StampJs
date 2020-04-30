@@ -13,6 +13,7 @@ let StampJsView =  {
             selector + ' input[type="text"]',
             selector + ' input[type="date"]',
             selector + ' input[type="number"]',
+            selector + ' select',
         ];
         
         inputs.forEach(function(selector) {
@@ -22,18 +23,11 @@ let StampJsView =  {
             });
         });
         
-        let selects = document.querySelectorAll(
-            selector + ' select option:first-child'
-        );
-        Array.prototype.forEach.call(selects, function(elm) {
-            elm.selected = true;
-        });
-        
         let radios = document.querySelectorAll(
-            selector + ' input[type="radio"]:default',
+            selector + ' input[type="radio"]',
         );
         Array.prototype.forEach.call(radios, function(elm) {
-            elm.checked = true;
+            elm.checked = elm.defaultChecked? true:false;
         });
     },
     
@@ -48,6 +42,7 @@ let StampJsView =  {
             selector + ' input[type="text"][name$="[' + no + ']"]',
             selector + ' input[type="date"][name$="[' + no + ']"]',
             selector + ' input[type="number"][name$="[' + no + ']"]',
+            selector + ' select[name$="[' + no + ']"]'
         ];
         
         inputs.forEach(function(selector) {
@@ -55,20 +50,6 @@ let StampJsView =  {
             Array.prototype.forEach.call(elms, function(elm) {
                 elm.value = '';
             });
-        });
-        
-        let selects = document.querySelectorAll(
-            selector + ' select[name$="[' + no + ']"] option:first-child'
-        );
-        Array.prototype.forEach.call(selects, function(elm) {
-            elm.selected = true;
-        });
-        
-        let radios = document.querySelectorAll(
-            selector + ' input[type="radio"][name$="[' + no + ']"]:default',
-        );
-        Array.prototype.forEach.call(radios, function(elm) {
-            elm.checked = true;
         });
     },
     
@@ -111,8 +92,7 @@ let StampJsView =  {
         );
         
         Array.prototype.forEach.call(frame_radios, function(elm) {
-            let property = elm.name.replace(/\[\]/, '');
-            dataset.frame[property] = elm.value;
+            dataset.frame[elm.name] = elm.value;
         });
         
         let funcSetData = function(elm, val) {
@@ -122,7 +102,7 @@ let StampJsView =  {
             if (positions == null) return;
             
             let position = parseInt(
-                positions[0].replace(/[\[\]]/g, '')
+                positions[0].replace(/[\[\]]/g,'')
             ) - 1;
             
             dataset.data[position][property] = val;
@@ -207,13 +187,15 @@ let StampJsView =  {
                 selector + ' [name="' + name + '"]'
             );
             
-            if (elm != null) {
+            if (elm == null) return;
+            
+            if (elm.type.toLowerCase() != 'radio') {
                 elm.value = dataset.frame[name];
                 return;
             }
             
             let elms = document.querySelectorAll(
-                selector + ' [name="' + name + '[]"]'
+                selector + ' [name="' + name + '"]'
             );
             
             if (elms.length == 0) return;
@@ -222,14 +204,7 @@ let StampJsView =  {
             
             Array.prototype.forEach.call(elms, function(elm) {
                 if (elm.value == val) {
-                    switch (elm.type.toLowerCase()) {
-                        case 'radio':
-                            elm.checked = true;
-                            break;
-                        case 'select':
-                            elm.value = val;
-                            break;
-                    }
+                    elm.checked = true;
                 }
             });
         });
@@ -353,12 +328,12 @@ let StampJsView =  {
     */
     hiddenInStandard:function(selector, stamp_select) {
         let hidden_targets = [
-        'stamp_type[]',
-        'stamp_color[]',
-        'border_direction[]',
-        'text_placement[]',
-        'text_direction[]',
-        'option_position[]',
+        'stamp_type',
+        'stamp_color',
+        'border_direction',
+        'text_placement',
+        'text_direction',
+        'option_position',
         ];
         
         let inputs = document.querySelectorAll(
@@ -368,7 +343,7 @@ let StampJsView =  {
         Array.prototype.forEach.call(inputs, function(elm) {
             if (hidden_targets.includes(elm.name)) {
                 if (stamp_select == 'dateStamp' &&
-                    elm.name == 'option_position[]'
+                    elm.name == 'option_position'
                 ) {
                     elm.style.visibility = 'visible';
                     elm.parentNode.style.visibility = 'visible';
@@ -389,12 +364,12 @@ let StampJsView =  {
     */
     visibleInStandard:function(selector, stamp_select) {
         let hidden_targets = [
-        'stamp_type[]',
-        'stamp_color[]',
-        'border_direction[]',
-        'text_placement[]',
-        'text_direction[]',
-        'option_position[]',
+        'stamp_type',
+        'stamp_color',
+        'border_direction',
+        'text_placement',
+        'text_direction',
+        'option_position',
         ];
         
         let inputs = document.querySelectorAll(

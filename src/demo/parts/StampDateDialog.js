@@ -14,7 +14,7 @@
         ).value;
         
         let date_target = document.querySelector(
-            '#date_dialog [name="date_target[]"]:checked'
+            '#date_dialog [name="date_target"]:checked'
         ).value;
         
         let str = moment(date_input).format(date_format);

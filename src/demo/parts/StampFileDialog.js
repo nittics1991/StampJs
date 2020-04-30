@@ -26,6 +26,7 @@
                 StampJsView.save('frame1', data);
             });
             
+            StampJsView.clearImage('#frame1');
             StampJsView.clearForm('#frame1');
         });
     });
