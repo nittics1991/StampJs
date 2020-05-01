@@ -2,9 +2,9 @@ StampJs
 
 css外部ファイル化
 
-FileDialog動作確認
+FileDialog　イベント化?
 
-
+JS外部ファイル化
 
 
 ---
