@@ -7,8 +7,16 @@
 
 <style>
 
-#main {
+main {
     position:relative;
+}
+
+h1 {
+    font-size:1.6rem;
+}
+
+h2 {
+    font-size:1.5rem;
 }
 
 table {
@@ -16,20 +24,12 @@ table {
 }
 
 th,td {
-	border: 1px ridge #cfcfcf;
+	border:1px ridge #cfcfcf;
 }
 
 ul {
     padding:0;
     list-style-type:none;
-}
-
-input[type="number"] {
-    height:1rem;
-}
-
-.readonly {
-    background-color:#80B0F0;
 }
 
 .button_flex {
@@ -39,6 +39,14 @@ input[type="number"] {
 
 footer {
     height:40px;
+}
+
+input[type="number"] {
+    height:1rem;
+}
+
+.readonly {
+    background-color:#80B0F0;
 }
 
 .stamp_dialog {
@@ -51,11 +59,13 @@ footer {
     background-color:#ffffff;
 }
 
-.stamp_dialog > div:first-child {
+.stamp_dialog > h2 {
+    margin:0;
     background-color:#c0c0c0;
+    font-size:1rem;
 }
 
-.stamp_dialog > div:last-child {
+.stamp_dialog > nav {
     display:flex;
     justify-content:center
 }
@@ -69,63 +79,74 @@ footer {
 </head>
 <body>
 
-<div id="main">
-<div id="frame1" class="frame">
-	<h4>スタンプ StampFingerPrint</h4>
-	<div class="setting_area">
-		<table class="setting_data">
-			<thead>
-				<tr>
-					<th>有効日数</th>
-					<th>種別</th>
-					<th>座標X</th>
-					<th>座標X</th>
-					<th>色</th>
-				</tr>
-			</thead>
-			<tbody>
-                <tr>
-                    <td>
-                        <input type="hidden" name="stamp_select">
-                        <input type="number" name="stamp_expire" value="365">
-                    </td>
-                    <td><input type="text" class="readonly" name="stamp_name" readonly></td>
-                    <td><input type="number" name="stamp_x" value="0"></td>
-                    <td><input type="number" name="stamp_y" value="0"></td>
-                    <td><input type="color" name="stamp_color" value="#ffffff"></td>
-				</tr>
-			</tbody>
-        </table>
+<main>
+    <session id="frame1" class="frame">
+        <h1>スタンプ StampFingerPrint</h1>
         
-        <ul class="finger_buttons button_flex">
-            <li><button type="button" name="save_button">保存</button></li>
-            <li><button type="button" name="remove_button">削除</button></li>
-            <li><button type="button" name="upload_button">アップロード</button></li>
-            <li><button type="button" name="download_button">ダウンロード</button></li>
+        <article id="finger_setting">
+            <figure class="setting_area">
+                <table class="setting_data">
+                    <thead>
+                        <tr>
+                            <th>有効日数</th>
+                            <th>種別</th>
+                            <th>座標X</th>
+                            <th>座標X</th>
+                            <th>色</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <input type="hidden" name="stamp_select">
+                                <input type="number" name="stamp_expire" value="365">
+                            </td>
+                            <td><input type="text" class="readonly" name="stamp_name" readonly></td>
+                            <td><input type="number" name="stamp_x" value="0"></td>
+                            <td><input type="number" name="stamp_y" value="0"></td>
+                            <td><input type="color" name="stamp_color" value="#ffffff"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </figure>
+        </article>
+            
+        <nav class="setting_button">
+            <ul class="finger_buttons button_flex">
+                <li><button type="button" name="save_button">保存</button></li>
+                <li><button type="button" name="remove_button">削除</button></li>
+                <li><button type="button" name="upload_button">アップロード</button></li>
+                <li><button type="button" name="download_button">ダウンロード</button></li>
+            </ul>
+        </nav>
+            
+        <article id="finger_history">
+            <figure class="history_area">
+                <table class="history_data">
+                    <thead>
+                        <tr>
+                            <th>履歴</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </figure>
+        </article>
+    </session>
+
+    <aside id="file_dialog" class="stamp_dialog moveable" draggable="true">
+        <h2>ファイル選択</h2>
+        <ul>
+            <li><input type="file" name="file_name"></li>
+            <li><input type="hidden" name="id"></li>
         </ul>
-    </div>
-    
-	<div class="data_area">
-		<table class="finger_data">
-			<thead>
-				<tr>
-					<th>履歴</th>
-				</tr>
-			</thead>
-			<tbody>
-			</tbody>
-        </table>
-    </div>
-</div>
+        <nav>
+            <button type="button" name="close_button">閉じる</button>
+        </nav>
+    </aside>
 
-<div id="file_dialog" class="stamp_dialog moveable" draggable="true">
-    <div>ファイル選択</div>
-    <input type="file" name="file_name">
-    <input type="hidden" name="id">
-    <div><button type="button" name="close_button">閉じる</button></div>
-</div>
-
-</div>
+</main>
 
 <footer></footer>
 
