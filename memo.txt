@@ -1,0 +1,5 @@
+
+PHP-cURLを使ったSSLクライアント認証手順
+
+https://qiita.com/machio77777/items/48bcbe8ac58385a44799
+
