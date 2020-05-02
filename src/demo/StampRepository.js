@@ -55,3 +55,22 @@ StampRepository.prototype.load = function(id) {
 StampRepository.prototype._resolveId = function(id) {
     return this._namespace + '_' + id;
 };
+
+/**
+*   findAll
+*
+*   @param RegExp pattern
+*   @return array
+*/
+StampRepository.prototype.findAll = function(regexp) {
+    let result = [];
+    
+    for (let i = 0; i < window.localStorage.length; i++) {
+        let key = window.localStorage.key(i);
+        
+        if (regexp.test(key)) {
+            result.push(window.localStorage.getItem(key));
+        }
+    }
+    return result;
+};

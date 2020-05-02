@@ -1,1 +1,1 @@
-{"stamp_select":"companyStamp","stamp_expire":"2","stamp_name":"社印","stamp_x":"11","stamp_y":"12","stamp_color":"#29d3c7"}
+["{\"stamp_select\":\"dateStamp\",\"stamp_expire\":\"10\",\"stamp_name\":\"日付印\",\"stamp_x\":\"20\",\"stamp_y\":\"30\",\"stamp_color\":\"#e84343\"}","{\"stamp_select\":\"companyStamp\",\"stamp_expire\":\"100\",\"stamp_name\":\"社印\",\"stamp_x\":\"200\",\"stamp_y\":\"300\",\"stamp_color\":\"#2a5856\"}"]

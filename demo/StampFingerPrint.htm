@@ -159,7 +159,7 @@ input[type="number"] {
 
 <script src="../src/demo/parts/StampMoveable.js"></script>
 <script src="../src/demo/parts/StampDialog.js"></script>
-<script src="../src/demo/parts/StampFileDialog.js"></script>
+<script src="../src/demo/parts/StampFingerFileDialog.js"></script>
 
 <script>
 
@@ -212,7 +212,7 @@ document.querySelector('#frame1 button[name="upload_button"]')
 document.querySelector('#frame1 button[name="download_button')
     .addEventListener('click', function(e) {
     
-    StampFingerPrintView.download('#frame1');
+    StampFingerPrintView.download('frame1');
 });
 
 </script>

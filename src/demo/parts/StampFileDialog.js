@@ -17,9 +17,9 @@
                 !Array.isArray(dataset)
             ) return;
             
-            let selector = document.querySelector(
-                '#file_dialog [name="id"]'
-            ).value;
+            //let selector = document.querySelector(
+                //'#file_dialog [name="id"]'
+            //).value;
             
             dataset.forEach(function(json) {
                 let data = JSON.parse(json)

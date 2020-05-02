@@ -106,10 +106,11 @@ let StampFingerPrintView = {
     /**
     *   download
     *
-    *   @param string selector
+    *   @param string id
     */
-    download:function(selector) {
-        let dataset = StampFingerPrintView.formToData(selector);
+    download:function(id) {
+        let repository = new StampRepository('StampFingerPrintView');
+        dataset = repository.findAll(new RegExp(id));
         StampFileDownloader.download(JSON.stringify(dataset), 'finger.json')
     },
 };
