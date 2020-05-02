@@ -1,8 +1,10 @@
 StampJs
 
-css外部ファイル化
+finger upload 現在のstamp_selectしか保存していない
+stamp_selectのすべてのパターンを取得する方法がない
 
-FileDialog　イベント化?
+
+css外部ファイル化
 
 JS外部ファイル化
 

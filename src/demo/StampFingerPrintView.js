@@ -110,6 +110,6 @@ let StampFingerPrintView = {
     */
     download:function(selector) {
         let dataset = StampFingerPrintView.formToData(selector);
-        StampFileDownloader.download(JSON.stringify(dataset), 'setting.json')
+        StampFileDownloader.download(JSON.stringify(dataset), 'finger.json')
     },
 };
