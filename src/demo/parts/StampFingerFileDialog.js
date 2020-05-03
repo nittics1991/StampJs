@@ -30,7 +30,7 @@
             
             if (newdata == null) return;
             
-            StampFingerPrintView.dataToFrom('#fram1', newdata);
+            StampFingerPrintView.dataToFrom('#frame1', newdata);
         });
     });
 })();
