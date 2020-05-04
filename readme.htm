@@ -1,0 +1,86 @@
+<h1>StampJs</h1>
+
+<p>印鑑イメージをCanvasで生成する</p>
+
+<h2>使用例</h2>
+
+<ul>
+<li>a</li>
+<li>b</li>
+<li>v</li>
+</ul>
+
+<ol>
+<li>aaa</li>
+<li>bbb</li>
+</ol>
+
+<p><a href="http://qiita.com/">Qiita</a></p>
+
+<p>```</p>
+
+<p>HTML:inex.htm</p>
+
+<div id="stamp"></div>
+
+<script src="main.js"></script>
+
+<p>```</p>
+
+<p>```Javascript:main.js</p>
+
+<p>var dataset = {
+    frame:{
+        stamp<em>type:'circle',        //種別 
+        stamp</em>width:200,            //全体幅
+        stamp<em>height:200,           //全体高
+        line</em>weight:3,              //線幅
+        stamp<em>color:'red',          //印影色
+        border</em>direction:'H',       //仕切線方向
+        text<em>placement:'V',         //文字方向
+        text</em>direction:'H',         //文字配置方向
+        option<em>position:'bottom',   //追加情報
+    },
+    data:[
+        {   //1番
+            stamp</em>text:'(営業1)M',    //表示文字
+            font<em>family:'',         //フォント <br />
+            font</em>size:30,           //サイズ
+            text<em>align:'center',    //横配置
+            vertical</em>align:'bottom',//縦配置
+            margin<em>size:0,          //マージン
+        },
+        {   //2番
+            stamp</em>text:moment().format('YYYY-MM-DD'),
+            font<em>family:'',
+            font</em>size:30,
+            text<em>align:'center',
+            vertical</em>align:'middle',
+            margin<em>size:0,
+        },
+        {   //3番
+            stamp</em>text:'青木 太郎',
+            font<em>family:null,
+            font</em>size:30,
+            text<em>align:'center',
+            vertical</em>align:'top',
+            margin<em>size:5,
+        },
+        {   //4番 (追加情報ありの場合、追加情報データ)
+            stamp</em>text:'代',
+            font<em>family:null,
+            font</em>size:30,
+            text<em>align:'right',
+            vertical</em>align:'bottom',
+            margin_size:0,
+        },
+    ],
+};</p>
+
+<p>let stampJs = new StampJs('#stamp', dataset);
+stampJs.render();</p>
+
+<p>```</p>
+
+<p>frame.option_position&lt;&gt;'non'の場合、
+data[]の最後の設定をoptionのデータとする</p>
