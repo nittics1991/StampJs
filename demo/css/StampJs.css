@@ -1,0 +1,70 @@
+
+main {
+    position:relative;
+}
+
+footer {
+    height:40px;
+}
+
+
+h1 {
+    font-size:1.6rem;
+}
+
+h2 {
+    font-size:1.5rem;
+}
+
+canvas {
+	border:1px ridge #0000ff;
+}
+
+table {
+	border-collapse:collapse;
+}
+
+th,td {
+	border:1px ridge #cfcfcf;
+}
+
+ul {
+    padding:0;
+    list-style-type:none;
+}
+
+
+input:invalid {
+    border-color:red;
+}
+
+.readonly {
+    background-color:#80B0F0;
+}
+
+
+.button_flex {
+    display:flex;
+    align-items:center;
+}
+
+.stamp_dialog {
+    border:2px ridge #000000;
+    display:none;
+    z-index:10;
+    position:absolute;
+    left:40%;
+    top:20%;
+    background-color:#ffffff;
+}
+
+.stamp_dialog > h2 {
+    margin:0;
+    background-color:#c0c0c0;
+    font-size:1rem;
+}
+
+.stamp_dialog > nav {
+    display:flex;
+    justify-content:center
+}

@@ -1,0 +1,16 @@
+
+.font_family {
+    display:none;
+}
+
+#file_dialog {
+    width:300px;
+}
+
+#date_dialog {
+    width:250px;
+}
+
+input[type="date"] {
+    height:1rem;
+}
