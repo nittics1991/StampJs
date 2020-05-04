@@ -4,22 +4,7 @@
 
 <h2>使用例</h2>
 
-<ul>
-<li>a</li>
-<li>b</li>
-<li>v</li>
-</ul>
-
-<ol>
-<li>aaa</li>
-<li>bbb</li>
-</ol>
-
-<p><a href="http://qiita.com/">Qiita</a></p>
-
-<p>```</p>
-
-<p>HTML:inex.htm</p>
+<p>```HTML:inex.htm</p>
 
 <div id="stamp"></div>
 
@@ -31,23 +16,23 @@
 
 <p>var dataset = {
     frame:{
-        stamp<em>type:'circle',        //種別 
-        stamp</em>width:200,            //全体幅
-        stamp<em>height:200,           //全体高
-        line</em>weight:3,              //線幅
-        stamp<em>color:'red',          //印影色
-        border</em>direction:'H',       //仕切線方向
-        text<em>placement:'V',         //文字方向
-        text</em>direction:'H',         //文字配置方向
-        option<em>position:'bottom',   //追加情報
+        stamp<em>type:'circle',        //種別 circle:rect
+        stamp</em>width:200,            //全体幅 0〜
+        stamp<em>height:200,           //全体高 0〜
+        line</em>weight:3,              //線幅 1〜
+        stamp<em>color:'red',          //印影色 css style
+        border</em>direction:'H',       //仕切線方向 H:V
+        text<em>placement:'V',         //文字方向 H:V
+        text</em>direction:'H',         //文字配置方向 H:V
+        option<em>position:'bottom',   //追加情報 non:top:bottom:left:loght
     },
     data:[
         {   //1番
             stamp</em>text:'(営業1)M',    //表示文字
-            font<em>family:'',         //フォント <br />
+            font<em>family:'',         //フォント
             font</em>size:30,           //サイズ
-            text<em>align:'center',    //横配置
-            vertical</em>align:'bottom',//縦配置
+            text<em>align:'center',    //横配置 left:center:light
+            vertical</em>align:'bottom',//縦配置 top:middle:bottom
             margin<em>size:0,          //マージン
         },
         {   //2番
@@ -66,13 +51,13 @@
             vertical</em>align:'top',
             margin<em>size:5,
         },
-        {   //4番 (追加情報ありの場合、追加情報データ)
-            stamp</em>text:'代',
-            font<em>family:null,
-            font</em>size:30,
-            text<em>align:'right',
-            vertical</em>align:'bottom',
-            margin_size:0,
+        {   //4番 (option</em>position=non以外の場合、追加情報データ扱い)
+            stamp<em>text:'代',
+            font</em>family:null,
+            font<em>size:30,
+            text</em>align:'right',
+            vertical<em>align:'bottom',
+            margin</em>size:0,
         },
     ],
 };</p>
@@ -82,5 +67,46 @@ stampJs.render();</p>
 
 <p>```</p>
 
-<p>frame.option_position&lt;&gt;'non'の場合、
-data[]の最後の設定をoptionのデータとする</p>
+<h2>標準パターン</h2>
+
+<ul>
+<li>日付印 dateStamp</li>
+<li>認印 signetStamp</li>
+<li>角印 squareStamp</li>
+<li>会社印 companyStamp</li>
+</ul>
+
+<p>```Javascript:main.js</p>
+
+<p>let factory = new StampFactory();
+let builder = factory.builder();</p>
+
+<p>let stampJs = builder.dateStamp('#stamp', dataset);
+//let stampJs = builder.signetStamp('#stamp', dataset);
+//let stampJs = builder.squareStamp('#stamp', dataset);
+//let stampJs = builder.companyStamp('#stamp', dataset);</p>
+
+<p>stampJs.render();</p>
+
+<p>```</p>
+
+<h2>デモ</h2>
+
+<ul>
+<li>demo/StampJsView.htm メイン画面</li>
+<li><p>demo/StampFingerPrint.htm 指紋管理画面</p></li>
+<li><p>Javascript内で定義したスタンプを初期表示</p></li>
+<li>画面より設定値を入力・表示</li>
+<li>標準パターンの選択</li>
+<li>独自に5パターン追加する事が可能</li>
+<li>設定値をlocalStorageに保存可能</li>
+<li>localStorageの設定値に対し、ファイルimport/export</li>
+<li>カレンダーダイアログで簡単日付文字入力(momentjsフォーマット指定)</li>
+<li>印影に指紋挿入機能</li>
+<li>指紋の履歴をlocalStorageに保存</li>
+<li>指紋の設定もスタンプと同様に保存操作可能</li>
+</ul>
+
+<h2>サンプル</h2>
+
+<p>sample/*.htm</p>
